@@ -5,8 +5,8 @@
  */
 package mergesortgame;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -20,9 +20,10 @@ import javax.swing.border.EmptyBorder;
 public class LoginNavBar extends JPanel implements MouseListener {
     
     public LoginNavBar() {
-        super(new BorderLayout());
+        super(new FlowLayout());
         
-        this.setBackground(Color.GRAY);
+        this.setBackground(new Color(211, 1, 1));
+        
         this.setBorder(new EmptyBorder(3, 3, 3, 3));
     }
     

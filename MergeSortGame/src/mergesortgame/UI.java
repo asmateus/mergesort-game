@@ -1,9 +1,10 @@
 package mergesortgame;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GraphicsDevice;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
@@ -16,6 +17,7 @@ public class UI extends JFrame implements Member
     private final GraphicsDevice device;
     private final Watchdog dog = new Watchdog();
     private final Container c;
+    private LoginNavBar flex_bar;
     
     private boolean fullscreen_support;
     
@@ -50,14 +52,42 @@ public class UI extends JFrame implements Member
         // Application title
         this.setTitle("MergeSort Game");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        c.setLayout(new BorderLayout());
-        c.setBackground(Color.WHITE);
+        
+        // Configuring the layout
+        GridBagLayout gbl = new GridBagLayout();
+        gbl.columnWeights = new double[] {0.4, 0.6};
+        gbl.rowWeights = new double[] {0.1, 0.1, 0.4, 0.4};
+        c.setLayout(gbl);
+        c.setBackground(Color.BLACK);
         
         setContentPane(c);
         
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 0;
+        cons.gridheight = 1;
+        cons.gridwidth = 2;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.anchor = GridBagConstraints.PAGE_START;
+        
         // Create and add the navigation bar
         NavBar nav_bar = new NavBar();
-        c.add(nav_bar, BorderLayout.NORTH);
+        c.add(nav_bar, cons);
+    }
+    
+    private void createLoginInterface() {
+        this.flex_bar = new LoginNavBar();
+        
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 3;
+        cons.gridheight = 1;
+        cons.gridwidth = 2;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.anchor = GridBagConstraints.PAGE_END;
+        
+        c.add(flex_bar, cons);
+        pack();
     }
     
     private void initWatchdog() {
@@ -68,7 +98,7 @@ public class UI extends JFrame implements Member
     @Override
     public boolean masterCall(int key) {
         if(key == KeyEvent.VK_L) {
-            System.out.println("Log in triggered");
+            this.createLoginInterface();
             return true;
         }
         
