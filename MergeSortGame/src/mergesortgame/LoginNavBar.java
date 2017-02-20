@@ -25,7 +25,7 @@ public class LoginNavBar extends JPanel implements Member {
         this.setBackground(new Color(255, 0, 0));
         this.setBorder(new EmptyBorder(3, 3, 3, 3));
         
-        CommandBar cmd = new CommandBar(100, dog);
+        CommandBar cmd = new CommandBar(100, Action.ACTION_LOGIN, dog);
         this.add(cmd);
     }
     
