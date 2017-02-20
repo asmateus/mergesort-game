@@ -66,5 +66,6 @@ public abstract class Action {
         return IN_OPERATION;
     }
     
+    public abstract int executeTaskChain();
     public abstract int onTasksEnd();
 }

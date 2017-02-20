@@ -82,25 +82,31 @@ public class CommandBar extends JTextField implements Member {
     private void createAction(int id) {
         switch(id) {
             case Action.ACTION_IDLE:
-                this.action = new ActionLogin();
+                this.action = new ActionLogin(this);
                 break;
             case Action.ACTION_LOGIN:
-                
+                this.action = new ActionLogin(this);
                 break;
             case Action.ACTION_REGISTER:
-                
+                this.action = new ActionLogin(this);
                 break;
             case Action.ACTION_SET_DFCT:
-                
+                this.action = new ActionLogin(this);
                 break;
             case Action.ACTION_SET_LVL:
-                
+                this.action = new ActionLogin(this);
                 break;
         }
     }
     
     private void processInput() {
-        System.out.println(this.getText());
+        int result = this.action.executeTaskChain();
+        if(result == Action.IN_OK) {
+            System.out.println("OK");
+        }
+        else if(result == Action.IN_ERROR){
+            System.out.println("ERROR");
+        }
     }
     
     public void changeCommandText(String cmm_txt) {
