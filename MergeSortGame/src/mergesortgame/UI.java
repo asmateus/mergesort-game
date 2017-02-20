@@ -20,6 +20,7 @@ public class UI extends JFrame implements Member
     private LoginNavBar flex_bar;
     
     private boolean fullscreen_support;
+    private boolean active_flex_bar = false;
     
     public UI(GraphicsDevice device)
     {
@@ -76,7 +77,8 @@ public class UI extends JFrame implements Member
     }
     
     private void createLoginInterface() {
-        this.flex_bar = new LoginNavBar();
+        this.active_flex_bar = true;
+        this.flex_bar = new LoginNavBar(this.dog);
         
         GridBagConstraints cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -98,7 +100,10 @@ public class UI extends JFrame implements Member
     @Override
     public boolean masterCall(int key) {
         if(key == KeyEvent.VK_L) {
-            this.createLoginInterface();
+            if(!active_flex_bar) {
+;
+                this.createLoginInterface();
+            }
             return true;
         }
         

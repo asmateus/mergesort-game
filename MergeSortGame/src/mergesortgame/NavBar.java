@@ -33,6 +33,9 @@ public class NavBar extends JPanel implements MouseListener {
     public NavBar() {
         super(new BorderLayout());
         
+        // Not focusable
+        this.setFocusable(false);
+        
         this.setBackground(Color.BLACK);
         this.setBorder(new EmptyBorder(3, 3, 3, 3));
         

@@ -7,9 +7,6 @@ package mergesortgame;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -17,28 +14,23 @@ import javax.swing.border.EmptyBorder;
  *
  * @author asmateus
  */
-public class LoginNavBar extends JPanel implements MouseListener {
+public class LoginNavBar extends JPanel implements Member {
     
-    public LoginNavBar() {
-        super(new FlowLayout());
+    public LoginNavBar(Watchdog dog) {
+        super(new FlowLayout(FlowLayout.LEFT));
         
-        this.setBackground(new Color(211, 1, 1));
+        // Not focusable
+        this.setFocusable(false);
         
+        this.setBackground(new Color(255, 0, 0));
         this.setBorder(new EmptyBorder(3, 3, 3, 3));
+        
+        CommandBar cmd = new CommandBar(100, dog);
+        this.add(cmd);
     }
     
     @Override
-    public void mouseClicked(MouseEvent me) {
-        String entity = ((JLabel) me.getSource()).getName();
-        System.out.println(entity);
+    public boolean masterCall(int key) {
+        return false;
     }
-    
-    @Override
-    public void mouseEntered(MouseEvent me) {}
-    @Override
-    public void mouseExited(MouseEvent me) {}
-    @Override
-    public void mouseReleased(MouseEvent me) {}
-    @Override
-    public void mousePressed(MouseEvent me) {}
 }
