@@ -14,10 +14,13 @@ import javax.swing.border.EmptyBorder;
  *
  * @author asmateus
  */
-public class LoginNavBar extends JPanel implements Member, Bar {
+public class LoginNavBar extends JPanel implements Bar {
     
-    public LoginNavBar(Watchdog dog) {
+    private UI ui;
+    
+    public LoginNavBar(Watchdog dog, UI ui) {
         super(new FlowLayout(FlowLayout.LEFT));
+        this.ui = ui;
         
         // Not focusable
         this.setFocusable(false);
@@ -31,13 +34,9 @@ public class LoginNavBar extends JPanel implements Member, Bar {
     
     @Override
     public void selfDestroy() {
+        this.ui.enableFlexBar();
         this.setEnabled(false);
         this.setVisible(false);
         this.removeAll();
-    }
-    
-    @Override
-    public boolean masterCall(int key) {
-        return false;
     }
 }

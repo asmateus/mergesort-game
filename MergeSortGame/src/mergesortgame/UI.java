@@ -48,6 +48,10 @@ public class UI extends JFrame implements Member
         this.initWatchdog();
     }
     
+    public void enableFlexBar() {
+        this.active_flex_bar = false;
+    }
+    
     private void init()
     {
         // Application title
@@ -78,7 +82,7 @@ public class UI extends JFrame implements Member
     
     private void createLoginInterface() {
         this.active_flex_bar = true;
-        this.flex_bar = new LoginNavBar(this.dog);
+        this.flex_bar = new LoginNavBar(this.dog, this);
         
         GridBagConstraints cons = new GridBagConstraints();
         cons.gridx = 0;
