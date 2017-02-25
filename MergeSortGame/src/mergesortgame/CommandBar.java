@@ -28,26 +28,48 @@ public class CommandBar extends JTextField implements Member {
     
     private final Watchdog dog;
     private Action action;
+    private String[] user_cred;
+    private Bar parent;
     
-    public CommandBar(int cap, int action_id, Watchdog dog) {
+    public CommandBar(int cap, int action_id, Watchdog dog, Bar parent) {
         super(cap);
+        this.parent = parent;
         this.setBackground(new Color(255, 0, 0));
         this.setForeground(Color.WHITE);
-        this.setText(this.task + SYMBOL);
-        this.setCaretPosition(this.task.length() + 1);
         this.setFont(this.getFont().deriveFont(Font.BOLD, 12f));
+        
+        // Create an action for commandBar
+        this.createAction(action_id);
+        
+        // Create message sequence
+        this.setMessage("");
         
         // Add command bar to watchdog
         this.dog = dog;
         this.dog.addMember(this);
         this.addKeyListener(dog);
         
-        // Create an action for commandBar
-        this.createAction(action_id);
+        // Get focus, this is outside the range of the Watchdog
+        this.requestFocusInWindow();
+    }
+    
+    public void setUser(String username, String status) {
+        this.user_cred = new String[] {username, status};
+    }
+    
+    public void setMessage(String placeholder) {
+        // Remove document filter
+        ((AbstractDocument) this.getDocument()).setDocumentFilter(new DocumentFilter() {});
         
+        this.task = placeholder + this.action.getMessage();
+        
+        this.setText(this.task + SYMBOL);
+        this.setCaretPosition(this.task.length() + 1);
+        
+        // Add document filter
         ((AbstractDocument) this.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
-            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
                 if (offset < task.length()+1) {
                     return;
                 }
@@ -55,7 +77,7 @@ public class CommandBar extends JTextField implements Member {
             }
 
             @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 if (offset < task.length()+1) {
                     length = Math.max(0, length - task.length()+1);
                     offset = task.length()+1;
@@ -64,7 +86,7 @@ public class CommandBar extends JTextField implements Member {
             }
 
             @Override
-            public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
+            public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                 if (offset < task.length()+1) {
                     length = Math.max(0, length + offset - task.length()+1);
                     offset = task.length()+1;
@@ -74,9 +96,6 @@ public class CommandBar extends JTextField implements Member {
                 }
             }
         });
-        
-        // Get focus, this is outside the range of the Watchdog
-        this.requestFocusInWindow();
     }
     
     private void createAction(int id) {
@@ -102,7 +121,10 @@ public class CommandBar extends JTextField implements Member {
     private void processInput() {
         int result = this.action.executeTaskChain();
         if(result == Action.IN_OK) {
-            System.out.println("OK");
+            // Execute exit protocol
+            this.dog.removeMember();
+            this.parent.selfDestroy();
+            
         }
         else if(result == Action.IN_ERROR){
             System.out.println("ERROR");

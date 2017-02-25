@@ -5,7 +5,6 @@
  */
 package mergesortgame;
 
-import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.json.*;
@@ -16,12 +15,16 @@ import org.json.*;
  */
 public class ActionLogin extends Action {
     
-    CommandBar cmd;
-    JSONObject db;
+    private CommandBar cmd;
+    private JSONObject db;
+    
+    private String username = "";
+    private boolean status = false;
     
     public ActionLogin(CommandBar cmd) {
         super(Action.ACTION_LOGIN);
         
+        this.mess_list = new String[] {"password", "username"};
         this.cmd = cmd;
         this.load_db();
     }
@@ -37,23 +40,43 @@ public class ActionLogin extends Action {
     @Override
     public int executeTaskChain() {
         if(this.db != null) {
-            JSONArray arr = db.getJSONArray("users");
-            int i = 0; boolean isthere = false;
-            while(i < arr.length() && isthere == false) {
-                if(arr.getJSONObject(i).has(this.cmd.getText())) {
+            if(this.getTaskCount() == 2) {
+                boolean isthere = false;
+                JSONObject obj;
+                try {
+                    obj = db.getJSONObject(this.cmd.getText());
                     isthere = true;
                 }
-                ++i;
+                catch(Exception e) {
+                    System.out.println(e.toString());
+                }
+
+                if(isthere == true) {
+                    this.username = this.cmd.getText();
+                    definitive_state = this.reduceTaskCount();
+                    this.cmd.setMessage("");
+                }
+                else {
+                    this.cmd.setMessage("(USER NOT FOUND) ");
+                }
             }
-            
-            if(isthere == true) {
-                System.out.println("User found");
-            }
-            else {
-                System.out.println("User not found");
+            else if(this.getTaskCount() == 1) {
+                JSONObject obj = db.getJSONObject(username);
+                String pass = obj.getString("pass");
+                boolean isthere = false;
+                if(this.cmd.getText().equals(pass)) {
+                    isthere = true;
+                }
+                
+                if(isthere == true) {
+                    definitive_state = this.reduceTaskCount();
+                }
+                else {
+                    this.cmd.setMessage("(WRONG PASSWORD) ");
+                }
             }
         }
-        return Action.IN_OPERATION;
+        return this.definitive_state;
     }
     
     @Override

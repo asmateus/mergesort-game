@@ -20,8 +20,11 @@ public abstract class Action {
     public static final int IN_ERROR = 0;
     public static final int IN_OK = 1;
     
+    public int definitive_state = IN_OPERATION;
+    
     private int task_count;
     private int action_id;
+    public String[] mess_list; 
     
     public Action(int action_id) {
         this.action_id = action_id;
@@ -33,6 +36,13 @@ public abstract class Action {
             this.action_id = id;
             this.setTaskCount();
         }
+    }
+    
+    public String getMessage() {
+        if(this.getTaskCount() == 0)
+            return "";
+        else
+            return this.mess_list[this.getTaskCount()-1];
     }
     
     private void setTaskCount() {
@@ -56,14 +66,17 @@ public abstract class Action {
     }
     
     public int reduceTaskCount() {
+        --this.task_count;
         if(this.task_count != 0) {
-            --this.task_count;
+            return Action.IN_OPERATION;
         }
         else {
             return this.onTasksEnd();
         }
-        
-        return IN_OPERATION;
+    }
+    
+    public int getTaskCount() {
+        return this.task_count;
     }
     
     public abstract int executeTaskChain();

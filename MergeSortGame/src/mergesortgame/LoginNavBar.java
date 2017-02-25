@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author asmateus
  */
-public class LoginNavBar extends JPanel implements Member {
+public class LoginNavBar extends JPanel implements Member, Bar {
     
     public LoginNavBar(Watchdog dog) {
         super(new FlowLayout(FlowLayout.LEFT));
@@ -25,8 +25,15 @@ public class LoginNavBar extends JPanel implements Member {
         this.setBackground(new Color(255, 0, 0));
         this.setBorder(new EmptyBorder(3, 3, 3, 3));
         
-        CommandBar cmd = new CommandBar(100, Action.ACTION_LOGIN, dog);
+        CommandBar cmd = new CommandBar(100, Action.ACTION_LOGIN, dog, this);
         this.add(cmd);
+    }
+    
+    @Override
+    public void selfDestroy() {
+        this.setEnabled(false);
+        this.setVisible(false);
+        this.removeAll();
     }
     
     @Override

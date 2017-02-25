@@ -1,22 +1,16 @@
 {
-    "users": [
-        {
-        "asmateus": {
-            "pass": 12345,
-            "level": 1,
-            "current_dificulty": 1,
-            "fail_count": 2,
-            "score": [29,0,0,0,0]
-            }
-        },
-        {
-        "misaka": {
-            "pass": 123,
-            "level": 1,
-            "current_dificulty": 1,
-            "fail_count": 0,
-            "score": [0,0,0,0,0]
-            }
-        }
-    ]   
+    "asmateus": {
+        "pass": "12345",
+        "level": 1,
+        "current_dificulty": 1,
+        "fail_count": 2,
+        "score": [29,0,0,0,0]
+    },
+    "misaka": {
+        "pass": "123",
+        "level": 1,
+        "current_dificulty": 1,
+        "fail_count": 0,
+        "score": [0,0,0,0,0]
+    }
 }
