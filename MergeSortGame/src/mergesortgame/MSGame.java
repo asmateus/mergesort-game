@@ -19,11 +19,11 @@ public class MSGame
         GraphicsDevice device = env.getScreenDevices()[0];
         
         // Launch a user instance, it is *visitor* for default
-        User user = new User("");
+        User user = new User(User.DEFAULT_USER);
         
         // Initiate graphical user interface
         UI ui = new UI(device);
-        ui.begin();
+        ui.begin(user);
     }
     
 }

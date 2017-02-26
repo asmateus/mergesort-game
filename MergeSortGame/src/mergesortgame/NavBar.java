@@ -61,6 +61,14 @@ public class NavBar extends JPanel implements MouseListener {
         this.menu_label.addMouseListener(this);
     }
     
+    public void setUserName(String name) {
+        this.user_label.setText(name);
+    }
+    
+    public void setUserLevel(int level, int score) {
+        this.level_label.setText("Level 0" + level + " / Score " + score);
+    }
+    
     @Override
     public void mouseClicked(MouseEvent me) {
         String entity = ((JLabel) me.getSource()).getName();

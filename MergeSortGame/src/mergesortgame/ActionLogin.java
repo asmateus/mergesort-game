@@ -19,7 +19,6 @@ public class ActionLogin extends Action {
     private JSONObject db;
     
     private String username = "";
-    private boolean status = false;
     
     public ActionLogin(CommandBar cmd) {
         super(Action.ACTION_LOGIN);
@@ -69,6 +68,7 @@ public class ActionLogin extends Action {
                 }
                 
                 if(isthere == true) {
+                    this.cmd.setUserFromName(username);
                     definitive_state = this.reduceTaskCount();
                 }
                 else {

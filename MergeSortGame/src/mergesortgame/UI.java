@@ -17,7 +17,9 @@ public class UI extends JFrame implements Member
     private final GraphicsDevice device;
     private final Watchdog dog = new Watchdog();
     private final Container c;
+    
     private LoginNavBar flex_bar;
+    private NavBar nav_bar;
     
     private boolean fullscreen_support;
     private boolean active_flex_bar = false;
@@ -31,7 +33,8 @@ public class UI extends JFrame implements Member
         this.init();
     }
     
-    public void begin() {
+    public void begin(User user) {
+        // Display interface
         this.fullscreen_support = this.device.isFullScreenSupported();
         setUndecorated(this.fullscreen_support);
         setResizable(!this.fullscreen_support);
@@ -46,10 +49,22 @@ public class UI extends JFrame implements Member
         }
         
         this.initWatchdog();
+        
+        // Load user data
+        this.loadUserData();
     }
     
-    public void enableFlexBar() {
+    public void enableFlexBar(int cause) {
         this.active_flex_bar = false;
+        this.requestFocusInWindow();
+        if(cause == Action.ACTION_LOGIN) {
+            this.loadUserData();
+        }
+    }
+    
+    private void loadUserData() {
+        this.nav_bar.setUserName(this.dog.master.getUserName());
+        this.nav_bar.setUserLevel(this.dog.master.getUserLevel(), this.dog.master.getUserScore());
     }
     
     private void init()
@@ -76,12 +91,11 @@ public class UI extends JFrame implements Member
         cons.anchor = GridBagConstraints.PAGE_START;
         
         // Create and add the navigation bar
-        NavBar nav_bar = new NavBar();
+        nav_bar = new NavBar();
         c.add(nav_bar, cons);
     }
     
     private void createLoginInterface() {
-        this.active_flex_bar = true;
         this.flex_bar = new LoginNavBar(this.dog, this);
         
         GridBagConstraints cons = new GridBagConstraints();
@@ -105,7 +119,7 @@ public class UI extends JFrame implements Member
     public boolean masterCall(int key) {
         if(key == KeyEvent.VK_L) {
             if(!active_flex_bar) {
-;
+                this.active_flex_bar = true;
                 this.createLoginInterface();
             }
             return true;

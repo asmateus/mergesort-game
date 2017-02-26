@@ -27,9 +27,9 @@ public class CommandBar extends JTextField implements Member {
     public String task = "mergesort-cmd";
     
     private final Watchdog dog;
+    private final Bar parent;
     private Action action;
-    private String[] user_cred;
-    private Bar parent;
+    private User current_user;
     
     public CommandBar(int cap, int action_id, Watchdog dog, Bar parent) {
         super(cap);
@@ -53,8 +53,10 @@ public class CommandBar extends JTextField implements Member {
         this.requestFocusInWindow();
     }
     
-    public void setUser(String username, String status) {
-        this.user_cred = new String[] {username, status};
+    public void setUserFromName(String username) {
+        this.current_user = new User(username);
+        this.current_user.pullDataFromOrigin();
+        this.dog.master = current_user;
     }
     
     public void setMessage(String placeholder) {
