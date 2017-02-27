@@ -63,8 +63,10 @@ public class UI extends JFrame implements Member
     }
     
     private void loadUserData() {
-        this.nav_bar.setUserName(this.dog.master.getUserName());
-        this.nav_bar.setUserLevel(this.dog.master.getUserLevel(), this.dog.master.getUserScore());
+        this.nav_bar.setUserNameLabel(this.dog.master.getUserName());
+        this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(), this.dog.master.getUserScore());
+        this.nav_bar.setDifficultyLabel(this.dog.master.getUserDifficulty());
+        this.nav_bar.setFailCountLabel(this.dog.master.getUserFailCount());
     }
     
     private void init()

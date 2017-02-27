@@ -55,7 +55,7 @@ public class CommandBar extends JTextField implements Member {
     
     public void setUserFromName(String username) {
         this.current_user = new User(username);
-        this.current_user.pullDataFromOrigin();
+        this.current_user.RequestDataFromOrigin();
         this.dog.master = current_user;
     }
     
