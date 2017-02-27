@@ -18,7 +18,7 @@ public class ActionRegister extends Action {
     public ActionRegister(CommandBar cmd) {
         super(Action.ACTION_REGISTER);
         
-        this.mess_list = new String[] {"NEW password", "NEW username"};
+        this.mess_list = new String[] {"password (NEW)", "username (NEW)"};
         this.cmd = cmd;
     }
     
@@ -26,11 +26,13 @@ public class ActionRegister extends Action {
     public int executeTaskChain() {
         if(this.getTaskCount() == 2) {
             this.username = this.cmd.getText();
+            this.definitive_state = this.reduceTaskCount();
+            this.cmd.setMessage("");
         }
         else if(this.getTaskCount() == 1) {
             this.password = this.cmd.getText();
+            this.definitive_state = this.reduceTaskCount();
         }
-        this.definitive_state = Action.IN_OK;
         return this.definitive_state;
     }
     

@@ -84,23 +84,28 @@ public class IOManager {
     }
     
     public void createUserFields(String pass) {
-        try {
-            JSONObject obj = new JSONObject();
-            obj.append("pass", pass);
-            obj.append("level", "0");
-            obj.append("current_difficulty", "1");
-            obj.append("fail_count", "0");
-            obj.append("score", "0,0,0,0,0");
-            this.db.append(this.user, obj);
-            try (FileWriter file = new FileWriter("data/db.json")) 
-            {
-                file.write(this.db.toString());
-            }
-
+        this.pullDataFromOrigin();
+        
+        if(this.error_flag) {
             this.error_flag = false;
-        }
-        catch(Exception e) {
-            this.error_flag = true;
+            try {
+                JSONObject obj = new JSONObject();
+                obj.put("pass", pass);
+                obj.put("level", "1");
+                obj.put("current_difficulty", "1");
+                obj.put("fail_count", "0");
+                obj.put("score", "0,0,0,0,0");
+                this.db.put(this.user, obj);
+                try (FileWriter file = new FileWriter("data/db.json")) 
+                {
+                    file.write(this.db.toString());
+                }
+
+                this.error_flag = false;
+            }
+            catch(Exception e) {
+                this.error_flag = true;
+            }
         }
     }
 }
