@@ -53,25 +53,42 @@ public class UI extends JFrame implements Member
         this.initWatchdog();
         
         // Load user data
-        this.loadUserData();
+        this.loadUserData(-1);
     }
     
     public void enableFlexBar(int cause) {
         this.active_flex_bar = false;
         this.requestFocusInWindow();
         if(cause == Action.ACTION_LOGIN) {
-            this.loadUserData();
+            this.loadUserData(-1);
         }
         else if(cause == Action.ACTION_REGISTER) {
             
         }
     }
     
-    private void loadUserData() {
-        this.nav_bar.setUserNameLabel(this.dog.master.getUserName());
-        this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(), this.dog.master.getUserScore());
-        this.nav_bar.setDifficultyLabel(this.dog.master.getUserDifficulty());
-        this.nav_bar.setFailCountLabel(this.dog.master.getUserFailCount());
+    private void loadUserData(int precision) {
+        switch(precision) {
+            case User.LEVEL_OFFSET:
+                this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(),
+                    this.dog.master.getUserScore());
+                break;
+            case User.SCORE_OFFSET:
+                this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(),
+                    this.dog.master.getUserScore());
+                break;
+            case User.DIFFICULTY_OFFSET:
+                this.nav_bar.setDifficultyLabel(this.dog.master.getUserDifficulty());
+                break;
+            case User.FAIL_COUNT_OFFSET:
+                this.nav_bar.setFailCountLabel(this.dog.master.getUserFailCount());
+                break;
+            default:
+                this.nav_bar.setUserNameLabel(this.dog.master.getUserName());
+                this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(), this.dog.master.getUserScore());
+                this.nav_bar.setDifficultyLabel(this.dog.master.getUserDifficulty());
+                this.nav_bar.setFailCountLabel(this.dog.master.getUserFailCount());
+        }
     }
     
     private void init()
@@ -154,7 +171,7 @@ public class UI extends JFrame implements Member
                 // save user statistics
                 this.dog.master.SendDataToOrigin();
                 this.dog.master = new User(User.DEFAULT_USER);
-                this.loadUserData();
+                this.loadUserData(-1);
             }
             return true;
         }
@@ -165,6 +182,18 @@ public class UI extends JFrame implements Member
                 this.createRegisterInterface();
             }
             
+            return true;
+        }
+        // Increase difficulty
+        else if(key == KeyEvent.VK_PLUS) {
+            this.dog.master.upDifficulty();
+            this.loadUserData(User.DIFFICULTY_OFFSET);
+            return true;
+        }
+        // Decrease difficulty
+        else if(key == KeyEvent.VK_MINUS) {
+            this.dog.master.lowerDifficulty();
+            this.loadUserData(User.DIFFICULTY_OFFSET);
             return true;
         }
         
