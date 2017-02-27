@@ -21,6 +21,9 @@ public class UI extends JFrame implements Member
     
     private JPanel flex_bar;
     private NavBar nav_bar;
+    private TheoricArea theoric_area;
+    private StatusArea status_area;
+    private GameArea game_area;
     
     private boolean fullscreen_support;
     private boolean active_flex_bar = false;
@@ -100,13 +103,15 @@ public class UI extends JFrame implements Member
         // Configuring the layout
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {0.4, 0.6};
-        gbl.rowWeights = new double[] {0.1, 0.1, 0.4, 0.4};
+        gbl.rowWeights = new double[] {0, 0.55, 0.45, 0};
         c.setLayout(gbl);
         c.setBackground(Color.BLACK);
         
         setContentPane(c);
         
         GridBagConstraints cons = new GridBagConstraints();
+        
+        // Create and add the navigation bar
         cons.gridx = 0;
         cons.gridy = 0;
         cons.gridheight = 1;
@@ -114,9 +119,44 @@ public class UI extends JFrame implements Member
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.anchor = GridBagConstraints.PAGE_START;
         
-        // Create and add the navigation bar
         nav_bar = new NavBar();
         c.add(nav_bar, cons);
+        
+        // Create and add Theoric area
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 1;
+        cons.gridheight = 1;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.BOTH;
+        cons.anchor = GridBagConstraints.PAGE_START;
+        
+        theoric_area = new TheoricArea();
+        c.add(theoric_area, cons);
+        
+        // Create and add Status area
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 2;
+        cons.gridheight = 1;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.BOTH;
+        cons.anchor = GridBagConstraints.PAGE_START;
+        
+        status_area = new StatusArea();
+        c.add(status_area, cons);
+        
+        // Create and add Game area
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 1;
+        cons.gridheight = 2;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.BOTH;
+        cons.anchor = GridBagConstraints.PAGE_START;
+        
+        game_area = new GameArea();
+        c.add(game_area, cons);
     }
     
     private void createLoginInterface() {
