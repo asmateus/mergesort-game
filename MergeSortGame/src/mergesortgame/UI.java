@@ -2,6 +2,7 @@ package mergesortgame;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,6 +26,8 @@ public class UI extends JFrame implements Member
     private StatusArea status_area;
     private GameArea game_area;
     
+    public final Dimension screen_size;
+    
     private boolean fullscreen_support;
     private boolean active_flex_bar = false;
     private boolean active_user_session = false;
@@ -33,6 +36,7 @@ public class UI extends JFrame implements Member
     {
         super(device.getDefaultConfiguration());
         this.device = device;
+        this.screen_size = new Dimension(device.getDisplayMode().getWidth(), device.getDisplayMode().getHeight());
         this.c = this.getContentPane();
         
         this.init();
@@ -155,7 +159,7 @@ public class UI extends JFrame implements Member
         cons.fill = GridBagConstraints.BOTH;
         cons.anchor = GridBagConstraints.PAGE_START;
         
-        game_area = new GameArea();
+        game_area = new GameArea(this);
         c.add(game_area, cons);
     }
     
