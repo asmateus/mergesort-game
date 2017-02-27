@@ -64,7 +64,7 @@ public class User {
         arr.add(""+this.level);
         arr.add(""+this.diff);
         arr.add(""+this.fail_count);
-        arr.add(""+this.score[0]+","+this.score[1]+","+this.score[2]+","+this.score[3]);
+        arr.add(""+this.score[0]+","+this.score[1]+","+this.score[2]+","+this.score[3] + "," + this.score[4]);
         
         this.io.pushDataToOrigin(arr);
     }
