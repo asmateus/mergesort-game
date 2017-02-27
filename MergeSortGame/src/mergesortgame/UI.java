@@ -23,6 +23,7 @@ public class UI extends JFrame implements Member
     
     private boolean fullscreen_support;
     private boolean active_flex_bar = false;
+    private boolean active_user_session = false;
     
     public UI(GraphicsDevice device)
     {
@@ -120,9 +121,20 @@ public class UI extends JFrame implements Member
     @Override
     public boolean masterCall(int key) {
         if(key == KeyEvent.VK_L) {
-            if(!active_flex_bar) {
-                this.active_flex_bar = true;
-                this.createLoginInterface();
+            if(!active_user_session) {
+                if(!active_flex_bar) {
+                    this.active_flex_bar = true;
+                    this.createLoginInterface();
+                    this.active_user_session = true;
+                }
+            }
+            else {
+                this.active_user_session = false;
+                
+                // save user statistics
+                this.dog.master.SendDataToOrigin();
+                this.dog.master = new User(User.DEFAULT_USER);
+                this.loadUserData();
             }
             return true;
         }

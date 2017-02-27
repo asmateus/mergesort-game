@@ -19,7 +19,7 @@ import java.util.Stack;
 public class Watchdog implements KeyListener {
     
     // master is the user of the current session
-    public User master = new User("misaka");
+    public User master = new User(User.DEFAULT_USER);
     private final Stack<Member> subscribers = new Stack<>();
     
     public Watchdog() {

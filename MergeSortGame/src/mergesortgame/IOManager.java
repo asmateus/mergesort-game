@@ -5,6 +5,7 @@
  */
 package mergesortgame;
 
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -69,6 +70,12 @@ public class IOManager {
                 obj.put("current_difficulty", data.get(User.DIFFICULTY_OFFSET));
                 obj.put("fail_count", data.get(User.FAIL_COUNT_OFFSET));
                 obj.put("score", data.get(User.SCORE_OFFSET));
+                
+                this.db.put(this.user, obj);
+                try (FileWriter file = new FileWriter("data/db.json")) 
+                {
+                    file.write(this.db.toString());
+                }
                 
                 this.error_flag = false;
             }

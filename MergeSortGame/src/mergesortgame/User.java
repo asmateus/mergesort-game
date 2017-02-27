@@ -37,7 +37,7 @@ public class User {
     public static final String DIFF_MESSAGE_2 = "Advanced";
     public static final String DIFF_MESSAGE_3 = "Legendary";
     
-    public static final String DEFAULT_USER = "misaka";
+    public static final String DEFAULT_USER = "visitor";
     
     public User(String user_name) {
         this.user_name = user_name;
