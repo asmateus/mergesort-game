@@ -8,6 +8,7 @@ package mergesortgame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -109,7 +110,7 @@ public class CommandBar extends JTextField implements Member {
                 this.action = new ActionLogin(this);
                 break;
             case Action.ACTION_REGISTER:
-                this.action = new ActionLogin(this);
+                this.action = new ActionRegister(this);
                 break;
             case Action.ACTION_SET_DFCT:
                 this.action = new ActionLogin(this);

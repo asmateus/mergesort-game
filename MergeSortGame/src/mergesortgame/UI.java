@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,7 +19,7 @@ public class UI extends JFrame implements Member
     private final Watchdog dog = new Watchdog();
     private final Container c;
     
-    private LoginNavBar flex_bar;
+    private JPanel flex_bar;
     private NavBar nav_bar;
     
     private boolean fullscreen_support;
@@ -60,6 +61,9 @@ public class UI extends JFrame implements Member
         this.requestFocusInWindow();
         if(cause == Action.ACTION_LOGIN) {
             this.loadUserData();
+        }
+        else if(cause == Action.ACTION_REGISTER) {
+            
         }
     }
     
@@ -113,6 +117,21 @@ public class UI extends JFrame implements Member
         pack();
     }
     
+    private void createRegisterInterface() {
+        this.flex_bar = new RegisterNavBar(this.dog, this);
+        
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 3;
+        cons.gridheight = 1;
+        cons.gridwidth = 2;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.anchor = GridBagConstraints.PAGE_END;
+        
+        c.add(flex_bar, cons);
+        pack();
+    }
+    
     private void initWatchdog() {
         this.dog.addMember(this);
         this.addKeyListener(this.dog);
@@ -120,6 +139,7 @@ public class UI extends JFrame implements Member
     
     @Override
     public boolean masterCall(int key) {
+        // Login
         if(key == KeyEvent.VK_L) {
             if(!active_user_session) {
                 if(!active_flex_bar) {
@@ -136,6 +156,15 @@ public class UI extends JFrame implements Member
                 this.dog.master = new User(User.DEFAULT_USER);
                 this.loadUserData();
             }
+            return true;
+        }
+        // Register
+        else if(key == KeyEvent.VK_R) {
+            if(!active_flex_bar) {
+                this.active_flex_bar = true;
+                this.createRegisterInterface();
+            }
+            
             return true;
         }
         

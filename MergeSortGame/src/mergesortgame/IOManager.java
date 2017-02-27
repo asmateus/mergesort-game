@@ -82,4 +82,25 @@ public class IOManager {
             catch(Exception e){this.error_flag = true;}
         }
     }
+    
+    public void createUserFields(String pass) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.append("pass", pass);
+            obj.append("level", "0");
+            obj.append("current_difficulty", "1");
+            obj.append("fail_count", "0");
+            obj.append("score", "0,0,0,0,0");
+            this.db.append(this.user, obj);
+            try (FileWriter file = new FileWriter("data/db.json")) 
+            {
+                file.write(this.db.toString());
+            }
+
+            this.error_flag = false;
+        }
+        catch(Exception e) {
+            this.error_flag = true;
+        }
+    }
 }
