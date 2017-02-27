@@ -9,6 +9,9 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import org.json.*;
 
 /**
@@ -107,5 +110,38 @@ public class IOManager {
                 this.error_flag = true;
             }
         }
+    }
+    
+    public ArrayList<SimpleUser> getTopPlayers(int amount) {
+        ArrayList<SimpleUser> scores = new ArrayList<>();
+        ArrayList<SimpleUser> returnarray = new ArrayList<>();
+        String next;
+        SimpleUser u;
+        JSONObject obj;
+        
+        Iterator keys = db.keys();
+        while(keys.hasNext()) {
+            next = keys.next().toString();
+            obj = db.getJSONObject(next);
+            
+            u = new SimpleUser();
+            u.setUserName(next);
+            u.setDiff(Integer.parseInt(obj.getString("current_difficulty")));
+            u.setFailCount(Integer.parseInt(obj.getString("fail_count")));
+            u.setLevel(Integer.parseInt(obj.getString("level")));
+            u.setScore(SimpleUser.calculateScore(obj.getString("score")));
+            
+            scores.add(u);
+        }
+        
+        Collections.sort(scores);
+        
+        int i = 0;
+        while(i < scores.size() && amount > 0) {
+            returnarray.add(scores.get(scores.size()-1-i));
+            ++i; --amount;
+        }
+        
+        return returnarray;
     }
 }

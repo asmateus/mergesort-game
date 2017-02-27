@@ -24,7 +24,7 @@ public abstract class Action {
     
     private int task_count;
     private int action_id;
-    public String[] mess_list; 
+    public String[] mess_list;
     
     public Action(int action_id) {
         this.action_id = action_id;
