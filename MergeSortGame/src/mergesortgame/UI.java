@@ -107,7 +107,7 @@ public class UI extends JFrame implements Member
         // Configuring the layout
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {0.4, 0.6};
-        gbl.rowWeights = new double[] {0, 0.55, 0.45, 0};
+        gbl.rowWeights = new double[] {0, 0.5, 0.5, 0};
         c.setLayout(gbl);
         c.setBackground(Color.BLACK);
         
@@ -238,6 +238,16 @@ public class UI extends JFrame implements Member
         else if(key == KeyEvent.VK_MINUS) {
             this.dog.master.lowerDifficulty();
             this.loadUserData(User.DIFFICULTY_OFFSET);
+            return true;
+        }
+        // Navigate information forward
+        else if(key == KeyEvent.VK_RIGHT) {
+            this.theoric_area.next();
+            return true;
+        }
+        // Navigate information backwards
+        else if(key == KeyEvent.VK_LEFT) {
+            this.theoric_area.previous();
             return true;
         }
         

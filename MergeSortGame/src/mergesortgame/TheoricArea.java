@@ -8,21 +8,26 @@ package mergesortgame;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.FileReader;
-import javax.swing.JEditorPane;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JPanel;
-import javax.swing.text.html.HTMLEditorKit;
 
 /**
  *
  * @author asmateus
  */
 public class TheoricArea extends JPanel {
-    private JEditorPane pseudocode = new JEditorPane();
+    private final InformationCard card;
+    private boolean status = true;
     private GridBagConstraints c = new GridBagConstraints();
     
     public final static String COVER_TEXT_FILE_PATH = "data/cover.html";
-    public final static String PSEUDOCODE_TEXT_FILE_PATH = "data/pseudocode.html";
+    public final static String[] THEORIC_CARDS = 
+                                {
+                                    "data/pseudocode.html",
+                                    "data/tn.html",
+                                    "data/explain.html"
+                                };
     
     public TheoricArea() {
         GridBagLayout gbl = new GridBagLayout();
@@ -32,58 +37,48 @@ public class TheoricArea extends JPanel {
         this.setLayout(gbl);
         this.setBackground(Color.BLACK);
         
-        this.initPseudocodeArea();
-        this.unCoverSecrets();
+        this.card = new InformationCard(new ArrayList(Arrays.asList(THEORIC_CARDS)));
+        
+        // Configure card display behaviour
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.PAGE_START;
+        this.add(this.card, c);
+        
+        this.coverSecrets();
     }
     
     public void lockCode() {
+        status = false;
         this.coverSecrets();
     }
     
     public void unLockCode() {
+        status = true;
         this.unCoverSecrets();
     }
     
-    private void initPseudocodeArea() {
-        this.pseudocode.setBackground(Color.BLACK);
-        this.pseudocode.setFocusable(false);
-        this.pseudocode.setEditable(false);
-        this.pseudocode.setEditorKit(new HTMLEditorKit());
+    public void next() {
+        if(status) {
+            this.card.next();
+        }
+    }
+    
+    public void previous() {
+        if(status) {
+            this.card.previous();
+        }
     }
     
     private void coverSecrets() {
-        try {
-            FileReader reader = new FileReader(COVER_TEXT_FILE_PATH);
-            this.pseudocode.read(reader, COVER_TEXT_FILE_PATH);
-        }
-        catch(Exception e) {}
-        
-        c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START;
-        
-        this.add(this.pseudocode, c);
+        this.card.setDummyCard();
     }
     
     private void unCoverSecrets() {
-        try {
-            FileReader reader = new FileReader(PSEUDOCODE_TEXT_FILE_PATH);
-            this.pseudocode.read(reader, PSEUDOCODE_TEXT_FILE_PATH);
-        }
-        catch(Exception e) {}
-        
-        c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START;
-        
-        this.add(this.pseudocode, c);
+        this.card.next();
     }
 }

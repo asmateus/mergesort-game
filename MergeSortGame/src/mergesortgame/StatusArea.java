@@ -55,7 +55,7 @@ public class StatusArea extends JPanel {
         
         c = new GridBagConstraints();
         c.gridx = 0;
-        c.gridy = 0;
+        c.gridy = 1;
         c.gridheight = 1;
         c.gridwidth = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -71,7 +71,7 @@ public class StatusArea extends JPanel {
         
         c = new GridBagConstraints();
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 0;
         c.gridheight = 1;
         c.gridwidth = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
