@@ -14,13 +14,19 @@ import javax.swing.JPanel;
  * @author asmateus
  */
 public class GameArea extends JPanel {
-    public GameArea(UI ui) {
+    
+    private JPanel level;
+    
+    public GameArea(UI ui, int diff) {
         GridBagLayout gbl = new GridBagLayout();
-        gbl.columnWeights = new double[] {0.3, 0.7};
-        gbl.rowWeights = new double[] {0, 0.4, 0.6, 0};
+        gbl.columnWeights = new double[] {1};
+        gbl.rowWeights = new double[] {1};
         
         this.setLayout(gbl);
-        this.setBackground(Color.blue);
+        this.setBackground(Color.BLACK);
         this.setPreferredSize(ui.screen_size);
+        
+        this.level = new Level1(diff);
+        this.add(level);
     }
 }
