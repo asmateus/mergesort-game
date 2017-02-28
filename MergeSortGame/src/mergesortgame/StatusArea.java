@@ -20,7 +20,7 @@ import javax.swing.text.html.HTMLEditorKit;
  */
 public class StatusArea extends JPanel {
     
-    public final static String HELP_TEXT_FILE_PATH = "data/help.html" ;
+    public final static String HELP_TEXT_FILE_PATH = "data/help.html";
     
     private ArrayList<SimpleUser> top_players = new ArrayList<>();
     
