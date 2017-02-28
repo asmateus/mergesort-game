@@ -13,11 +13,11 @@ import javax.swing.JPanel;
  *
  * @author asmateus
  */
-public class GameArea extends JPanel {
+public class GameArea extends JPanel implements Bar{
     
-    private JPanel level;
+    private Level level;
     
-    public GameArea(UI ui, int diff) {
+    public GameArea(UI ui, Watchdog dog) {
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {1};
         gbl.rowWeights = new double[] {1};
@@ -26,7 +26,16 @@ public class GameArea extends JPanel {
         this.setBackground(Color.BLACK);
         this.setPreferredSize(ui.screen_size);
         
-        this.level = new Level1(diff);
+        configureLevel(dog);
         this.add(level);
+    }
+    
+    private void configureLevel(Watchdog dog) {
+        this.level = new Level1(this, dog);
+    }
+    
+    @Override
+    public void selfDestroy(int exit_status) {
+    
     }
 }

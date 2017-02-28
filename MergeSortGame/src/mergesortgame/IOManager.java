@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import org.json.*;
 
@@ -110,6 +109,16 @@ public class IOManager {
                 this.error_flag = true;
             }
         }
+    }
+    
+    public String fetchStringFromCode(String code) {
+        try {
+            byte[] encoded = Files.readAllBytes(Paths.get("data/id_to_description.json"));
+            JSONObject code_db = new JSONObject(new String(encoded, "utf8"));
+            
+            return code_db.getString(code);
+        }
+        catch(Exception e) {return "";} 
     }
     
     public ArrayList<SimpleUser> getTopPlayers(int amount) {

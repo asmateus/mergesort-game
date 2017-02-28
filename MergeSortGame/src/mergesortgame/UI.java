@@ -163,7 +163,7 @@ public class UI extends JFrame implements Member
         cons.fill = GridBagConstraints.BOTH;
         cons.anchor = GridBagConstraints.PAGE_START;
         
-        game_area = new GameArea(this, this.dog.master.getUserDifficulty());
+        game_area = new GameArea(this, this.dog);
         c.add(game_area, cons);
     }
     

@@ -19,13 +19,13 @@ public class QuestionLogic {
     private ArrayList<String> answer_option_ids;
     private String correct_answer_id;
     
-    public static final String DUMMY_QUESTION_ID = "0000";
     public static final int NO_ANSWER = 1;
     public static final int SPECIFIC_ANSWER = 2;
     public static final int BOTH_ANSWERS = 3;
     
-    public QuestionLogic(String question, ArrayList<String> options) {
+    public QuestionLogic(String question, String correct, ArrayList<String> options) {
         this.question = question;
+        this.correct_answer_id = correct;
         this.answer_option_ids = options;
     }
     
@@ -55,14 +55,14 @@ public class QuestionLogic {
         }
         switch (include_dummy) {
             case NO_ANSWER:
-                picked_options.add(QuestionLogic.DUMMY_QUESTION_ID);
+                picked_options.add(QuestionOptions.DUMMY_QUESTION_ID);
                 break;
             case SPECIFIC_ANSWER:
                 picked_options.add(this.correct_answer_id);
                 break;
             default:
                 picked_options.remove(picked_options.size()-1);
-                picked_options.add(QuestionLogic.DUMMY_QUESTION_ID);
+                picked_options.add(QuestionOptions.DUMMY_QUESTION_ID);
                 picked_options.add(this.correct_answer_id);
                 break;
         }
@@ -71,7 +71,7 @@ public class QuestionLogic {
         
         switch(include_dummy) {
             case NO_ANSWER:
-                j = picked_options.indexOf(QuestionLogic.DUMMY_QUESTION_ID);
+                j = picked_options.indexOf(QuestionOptions.DUMMY_QUESTION_ID);
                 break;
             default:
                 j = picked_options.indexOf(this.correct_answer_id);
@@ -82,11 +82,13 @@ public class QuestionLogic {
     }
     
     private List<Integer> shuffleOptionsIndex(int cant_options, int amount) {
-        int max;
-        if(cant_options <= amount)
-            max = cant_options;
-        else
-            max = amount;
+        int max; int min;
+        if(cant_options >= amount) {
+            max = cant_options; min = amount;
+        }
+        else{
+            max = amount; min = cant_options;
+        }
         
         List<Integer> result = new ArrayList<>();
         for(int i = 0; i < max; ++i) {
@@ -94,6 +96,7 @@ public class QuestionLogic {
         }
         
         Collections.shuffle(result);
+        result = result.subList(0, min);
         return result;
     }
 }
