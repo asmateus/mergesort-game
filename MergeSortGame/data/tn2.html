@@ -1,0 +1,22 @@
+<html>
+<header>
+<style>
+body{color: white;text-align:left;}
+p{font-size:10px;}
+span{font-weight:bold;color:red;}
+</style>
+</header>
+<body>
+    <h3>Complexity Analysis (T(n) y O(n))</h3>
+    middle point calculation and half array assignment take a<br>
+    time of ~ <span>1+2*(n/2)</span> for each n in each recursive call.<br>
+    Merging these two times gives <span>T2(n) =~ 2*n+1</span> Now we recursively<br>
+    call over halfs of ns until unity; this type of segmented has<br>
+    the following relationship: <span>2^L = N</span> where <span>N</span> is the array<br>
+    size and <span>L</span> the number of posible divisions. Then <span>L = lg(N)</span>,<br>
+    and this is the number of times we repeat T2(n) for n = N,<br>
+    then: <span>T(n) =~ lg(N)*(2*n+1)</span> and<br>
+    <h2>The order is <span>&Theta(nlg(n))</span></h2>
+    
+</body>
+</html>

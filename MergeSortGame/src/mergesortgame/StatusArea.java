@@ -6,6 +6,7 @@
 package mergesortgame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.FileReader;
@@ -45,6 +46,7 @@ public class StatusArea extends JPanel {
         help_text.setBackground(Color.BLACK);
         help_text.setFocusable(false);
         help_text.setEditable(false);
+        help_text.setPreferredSize(new Dimension(20,250));
         help_text.setEditorKit(new HTMLEditorKit());
         
         try {

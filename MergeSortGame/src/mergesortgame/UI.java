@@ -68,6 +68,9 @@ public class UI extends JFrame implements Member
         this.requestFocusInWindow();
         if(cause == Action.ACTION_LOGIN) {
             this.loadUserData(-1);
+            if(this.dog.master.getUserLevel() > 1) {
+                this.theoric_area.unLockCode();
+            }
         }
         else if(cause == Action.ACTION_REGISTER) {
             
@@ -107,7 +110,7 @@ public class UI extends JFrame implements Member
         // Configuring the layout
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {0.4, 0.6};
-        gbl.rowWeights = new double[] {0, 0.5, 0.5, 0};
+        gbl.rowWeights = new double[] {0, 0.6, 0.4, 0};
         c.setLayout(gbl);
         c.setBackground(Color.BLACK);
         
@@ -135,7 +138,7 @@ public class UI extends JFrame implements Member
         cons.fill = GridBagConstraints.BOTH;
         cons.anchor = GridBagConstraints.PAGE_START;
         
-        theoric_area = new TheoricArea();
+        theoric_area = new TheoricArea(this);
         c.add(theoric_area, cons);
         
         // Create and add Status area

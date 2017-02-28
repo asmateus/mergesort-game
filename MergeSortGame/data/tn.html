@@ -1,11 +1,19 @@
 <html>
 <header>
 <style>
-body{color: white;text-align:center;font-size:30;font-weight:bold;}
+body{color: white;text-align:left;}
+p{font-size:10px;}
+span{font-weight:bold;color:red;}
 </style>
 </header>
 <body>
-    T(N) <br>
-    CALCULATIONS
+    <h3>Complexity Analysis (T(n) y O(n))</h3>
+    T(n) of MergeSort depends on the T1(n)of merge function, the<br>
+    middle point calculation, the half array assignment and the<br>
+    recursive call. The merge function T1(n) can be obtained<br>
+    intuitively as <span>T(n) = 2*min(r,l) + (max(r,l)-min(r,l))</span>, that<br>
+    is: First while of two instructions executes until the end of<br>
+    the smallest list is reached, then there are assignment instructions<br> of weight <span>max-min</span> length. Then: <span>T1(n) = max(r,l)+min(r,l) = n</span> of each<br> recursive operation. (Continue next page)
+    
 </body>
 </html>

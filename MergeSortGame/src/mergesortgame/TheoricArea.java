@@ -6,11 +6,13 @@
 package mergesortgame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -18,7 +20,7 @@ import javax.swing.JPanel;
  */
 public class TheoricArea extends JPanel {
     private final InformationCard card;
-    private boolean status = true;
+    private boolean status = false;
     private GridBagConstraints c = new GridBagConstraints();
     
     public final static String COVER_TEXT_FILE_PATH = "data/cover.html";
@@ -26,18 +28,21 @@ public class TheoricArea extends JPanel {
                                 {
                                     "data/pseudocode.html",
                                     "data/tn.html",
-                                    "data/explain.html"
+                                    "data/tn2.html"
                                 };
     
-    public TheoricArea() {
+    public TheoricArea(UI ui) {
         GridBagLayout gbl = new GridBagLayout();
-        gbl.columnWeights = new double[] {0.3, 0.7};
-        gbl.rowWeights = new double[] {0, 0.4, 0.6, 0};
+        gbl.columnWeights = new double[] {1};
+        gbl.rowWeights = new double[] {1};
         
         this.setLayout(gbl);
         this.setBackground(Color.BLACK);
         
         this.card = new InformationCard(new ArrayList(Arrays.asList(THEORIC_CARDS)));
+        JScrollPane mother_pane = new JScrollPane(this.card);
+        mother_pane.setPreferredSize(new Dimension(20,220));
+        mother_pane.setFocusable(false);
         
         // Configure card display behaviour
         c = new GridBagConstraints();
@@ -47,7 +52,7 @@ public class TheoricArea extends JPanel {
         c.gridwidth = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.PAGE_START;
-        this.add(this.card, c);
+        this.add(mother_pane, c);
         
         this.coverSecrets();
     }
