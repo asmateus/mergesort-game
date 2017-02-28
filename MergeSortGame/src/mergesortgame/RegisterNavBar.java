@@ -32,7 +32,7 @@ public class RegisterNavBar extends JPanel implements Bar {
     }
     
     @Override
-    public void selfDestroy() {
+    public void selfDestroy(int exit_status) {
         this.ui.enableFlexBar(Action.ACTION_REGISTER);
         this.setEnabled(false);
         this.setVisible(false);

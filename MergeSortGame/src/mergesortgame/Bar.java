@@ -10,5 +10,5 @@ package mergesortgame;
  * @author asmateus
  */
 public interface Bar {
-    public void selfDestroy();
+    public void selfDestroy(int exit_status);
 }

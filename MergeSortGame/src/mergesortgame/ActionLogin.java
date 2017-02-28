@@ -68,7 +68,6 @@ public class ActionLogin extends Action {
                 }
                 
                 if(isthere == true) {
-                    this.cmd.setUserFromName(username);
                     definitive_state = this.reduceTaskCount();
                 }
                 else {
@@ -81,6 +80,7 @@ public class ActionLogin extends Action {
     
     @Override
     public int onTasksEnd() {
+        this.cmd.setUserFromName(username);
         return Action.IN_OK;
     }
 }

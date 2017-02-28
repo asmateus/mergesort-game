@@ -33,7 +33,10 @@ public class LoginNavBar extends JPanel implements Bar {
     }
     
     @Override
-    public void selfDestroy() {
+    public void selfDestroy(int exit_status) {
+        if(exit_status == Action.IN_OK) {
+            ui.active_user_session = true;
+        }
         this.ui.enableFlexBar(Action.ACTION_LOGIN);
         this.setEnabled(false);
         this.setVisible(false);

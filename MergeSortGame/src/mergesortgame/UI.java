@@ -30,7 +30,8 @@ public class UI extends JFrame implements Member
     
     private boolean fullscreen_support;
     private boolean active_flex_bar = false;
-    private boolean active_user_session = false;
+    
+    public boolean active_user_session = false;
     
     public UI(GraphicsDevice device)
     {
@@ -209,7 +210,6 @@ public class UI extends JFrame implements Member
                 if(!active_flex_bar) {
                     this.active_flex_bar = true;
                     this.createLoginInterface();
-                    this.active_user_session = true;
                 }
             }
             else {

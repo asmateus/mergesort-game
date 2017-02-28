@@ -126,7 +126,7 @@ public class CommandBar extends JTextField implements Member {
         if(result == Action.IN_OK) {
             // Execute exit protocol
             this.dog.removeMember();
-            this.parent.selfDestroy();
+            this.parent.selfDestroy(Action.IN_OK);
             
         }
         else if(result == Action.IN_ERROR){
@@ -153,6 +153,10 @@ public class CommandBar extends JTextField implements Member {
     public boolean masterCall(int key) {
         if(key == KeyEvent.VK_ENTER) {
             this.processInput();
+        }
+        else if(key == KeyEvent.VK_ESCAPE) {
+            this.dog.removeMember();
+            this.parent.selfDestroy(Action.IN_ERROR);
         }
         
         return true;
