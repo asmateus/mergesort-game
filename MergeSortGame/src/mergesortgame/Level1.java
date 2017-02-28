@@ -5,7 +5,11 @@
  */
 package mergesortgame;
 
+import java.awt.Color;
+import java.io.FileReader;
 import java.util.ArrayList;
+import javax.swing.JEditorPane;
+import javax.swing.text.html.HTMLEditorKit;
 
 /**
  *
@@ -15,11 +19,21 @@ public class Level1 extends Level {
     
     public Level1(GameArea master, Watchdog dog) {
         super(dog.master.getUserDifficulty(), dog);
+        
     }
     
     @Override
     public void setDescriptionArea() {
-        this.setDescriptionArea(new DescriptionArea("data/descriptions/1.html"));
+        System.out.println();
+        
+        JEditorPane content = new JEditorPane();
+        content.setBackground(Color.BLACK);
+        content.setFocusable(false);
+        content.setEditable(false);
+        content.setContentType("text/html");
+        content.setText(DescriptionStrings.getDescriptionLVL1("descriptions/images/"));
+        
+        this.setDescriptionArea(new DescriptionArea(content));
     }
     
     @Override
@@ -57,6 +71,7 @@ public class Level1 extends Level {
     
     @Override
     public boolean masterCall(int key) {
+        System.out.println(key);
         return false;
     }
 }

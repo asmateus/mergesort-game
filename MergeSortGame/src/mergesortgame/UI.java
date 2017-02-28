@@ -39,7 +39,6 @@ public class UI extends JFrame implements Member
         this.device = device;
         this.screen_size = new Dimension(device.getDisplayMode().getWidth(), device.getDisplayMode().getHeight());
         this.c = this.getContentPane();
-        
         this.init();
     }
     

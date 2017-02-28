@@ -6,7 +6,8 @@
 package mergesortgame;
 
 import java.awt.Color;
-import java.awt.GridBagLayout;
+import java.awt.Dimension;
+import java.io.FileReader;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
@@ -16,11 +17,13 @@ import javax.swing.JScrollPane;
  */
 public class DescriptionArea extends JScrollPane {
     
-    private JEditorPane content = new JEditorPane();
     
-    public DescriptionArea(String html_source) {
-        this.add(content);
+    public DescriptionArea(JEditorPane source) {
+        super(source);
         this.setBackground(Color.BLACK);
+        this.setPreferredSize(new Dimension(600,300));
+        
+
     }
     
 }

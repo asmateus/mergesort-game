@@ -1,5 +1,5 @@
 {
-    "q000": "Which is the next iteration of mergesort?",
+    "q000": "Which is the next div-iteration of mergesort?",
     "0000": "None of these",
     "0001": "[1],[J],[A],[5],[Q],[1],[3],[8]",
     "0002": "[1,J],[5,Q],[A],[1,3,8]",

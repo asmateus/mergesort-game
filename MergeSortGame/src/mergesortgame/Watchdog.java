@@ -38,9 +38,9 @@ public class Watchdog implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if(!this.subscribers.isEmpty()) {
             int i = this.subscribers.size() - 1;
-            while(i < this.subscribers.size() 
+            while(i > -1 
                     && !this.subscribers.get(i).masterCall(e.getKeyCode())) {
-                ++i;
+                --i;
             }
         }
     }

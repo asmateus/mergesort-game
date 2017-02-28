@@ -32,6 +32,7 @@ public class GameArea extends JPanel implements Bar{
     
     private void configureLevel(Watchdog dog) {
         this.level = new Level1(this, dog);
+        this.level.setContent();
     }
     
     @Override

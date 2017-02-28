@@ -34,6 +34,9 @@ public abstract class Level extends JPanel implements Member {
         
         this.dog = dog;
         this.difficulty = difficulty;
+        
+        dog.addMember(this);
+        this.addKeyListener(dog);
     }
     
     public Watchdog getDog() {
