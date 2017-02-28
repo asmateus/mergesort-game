@@ -62,7 +62,7 @@ public class NavBar extends JPanel implements MouseListener {
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 0;
-        cons.anchor = GridBagConstraints.PAGE_START;
+        cons.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
         this.add(user_label, cons);
         
         // Configure level label
@@ -73,7 +73,7 @@ public class NavBar extends JPanel implements MouseListener {
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 0;
-        cons.anchor = GridBagConstraints.PAGE_START;
+        cons.anchor = GridBagConstraints.BELOW_BASELINE_LEADING;
         this.add(level_label, cons);
         
         // Configure difficulty label

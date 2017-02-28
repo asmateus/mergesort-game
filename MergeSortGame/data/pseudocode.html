@@ -1,0 +1,33 @@
+<html>
+<head>
+<style>
+body{color:white;}
+</style>
+</head>
+<body>
+<code>
+function mergeSort(list m) <br>
+ &nbsp if length of m <= 1 <br>
+ &nbsp  &nbsp return m <br>
+ &nbsp <br>
+ &nbsp left  = m[0:length of m / 2] <br>
+ &nbsp right = m[length of m / 2: length of m]<br>
+ &nbsp <br>
+ &nbsp left  = mergeSort(left)<br>
+ &nbsp right = mergeSort(right)<br>
+ &nbsp <br>
+ &nbsp merge(right, left)<br>
+<br>
+function merge(right, left)<br>
+ &nbsp result = empty list<br>
+ &nbsp while left not empty and right not empty do<br>
+ &nbsp  &nbsp if left[0] <= right[0]<br>
+ &nbsp  &nbsp  &nbsp append left[0] to result; left[1:length of m]<br>
+ &nbsp  &nbsp else<br>
+ &nbsp  &nbsp  &nbsp append right[0] to result; left[1:right of m]<br>
+ &nbsp <br>
+ &nbsp extend result with left<br>
+ &nbsp extend result with right<br>
+</code>
+</body>
+</html>

@@ -22,6 +22,7 @@ public class TheoricArea extends JPanel {
     private GridBagConstraints c = new GridBagConstraints();
     
     public final static String COVER_TEXT_FILE_PATH = "data/cover.html";
+    public final static String PSEUDOCODE_TEXT_FILE_PATH = "data/pseudocode.html";
     
     public TheoricArea() {
         GridBagLayout gbl = new GridBagLayout();
@@ -32,7 +33,7 @@ public class TheoricArea extends JPanel {
         this.setBackground(Color.BLACK);
         
         this.initPseudocodeArea();
-        this.coverSecrets();
+        this.unCoverSecrets();
     }
     
     public void lockCode() {
@@ -69,6 +70,20 @@ public class TheoricArea extends JPanel {
     }
     
     private void unCoverSecrets() {
-    
+        try {
+            FileReader reader = new FileReader(PSEUDOCODE_TEXT_FILE_PATH);
+            this.pseudocode.read(reader, PSEUDOCODE_TEXT_FILE_PATH);
+        }
+        catch(Exception e) {}
+        
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.PAGE_START;
+        
+        this.add(this.pseudocode, c);
     }
 }
