@@ -16,8 +16,11 @@ import javax.swing.JPanel;
 public class GameArea extends JPanel implements Bar{
     
     private Level level;
+    private UI ui;
     
     public GameArea(UI ui, Watchdog dog) {
+        this.ui = ui;
+        
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {1};
         gbl.rowWeights = new double[] {1};
@@ -27,16 +30,58 @@ public class GameArea extends JPanel implements Bar{
         this.setPreferredSize(ui.screen_size);
         
         configureLevel(dog);
-        this.add(level);
     }
     
     private void configureLevel(Watchdog dog) {
-        this.level = new Level1(this, dog);
+        switch(dog.master.getUserLevel()) {
+            case 1:
+                this.level = new Level1(this, dog);
+                break;
+            case 2:
+                this.level = new Level1(this, dog);
+                break;
+            case 3:
+                this.level = new Level1(this, dog);
+                break;
+            case 4:
+                this.level = new Level1(this, dog);
+                break;
+            case 5:
+                this.level = new Level1(this, dog);
+                break;
+            default:
+                this.level = new Level1(this, dog);
+                break;
+        }
         this.level.setContent();
+        this.add(level);
+        //this.ui.pack();
+    }
+    
+    private void ascendUser() {
+        generalUpdate();
+    }
+    
+    private void descendUser() {
+        generalUpdate();
+    }
+    
+    private void generalUpdate() {
+        User user = this.level.getDog().master;
+        IOManager io = new IOManager(user.getUserName());
     }
     
     @Override
     public void selfDestroy(int exit_status) {
-    
+        if(exit_status == Action.IN_OK) {
+            ascendUser();
+        }
+        else {
+            descendUser();
+        }
+        this.level.getDog().removeMember();
+        this.level.setVisible(false);
+        this.level.setEnabled(false);
+        this.removeAll();
     }
 }

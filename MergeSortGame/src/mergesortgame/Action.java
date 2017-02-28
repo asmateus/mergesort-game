@@ -12,6 +12,7 @@ package mergesortgame;
 public abstract class Action {
     public static final int ACTION_IDLE = 0;
     public static final int ACTION_LOGIN = 1;
+    public static final int ACTION_LVL_1 = 0;
     public static final int ACTION_REGISTER = 2;
     public static final int ACTION_SET_DFCT = 3;
     public static final int ACTION_SET_LVL = 4;
@@ -67,7 +68,7 @@ public abstract class Action {
     
     public int reduceTaskCount() {
         --this.task_count;
-        if(this.task_count != 0) {
+        if(this.task_count > 0) {
             return Action.IN_OPERATION;
         }
         else {

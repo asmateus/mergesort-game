@@ -1,1 +1,24 @@
-{"kaiou_saki":{"score":"100,100,100,100,99","pass":"122","level":"5","current_difficulty":"3","fail_count":"1"},"asmateus":{"score":"29,6,0,0,0","pass":"12345","level":"2","current_difficulty":"2","fail_count":"5"},"visitor":{"score":"0,0,0,0,0","pass":"123","level":"1","current_difficulty":"1","fail_count":"0"},"rnda":{"score":"0,0,0,0,0","pass":"123456","level":"1","current_difficulty":"1","fail_count":"0"},"misaka":{"score":"10,50,15,0,0","pass":"123","level":"4","current_difficulty":"2","fail_count":"8"}}
+{
+    "kaiou_saki":{
+        "score":"100,100,100,100,99",
+        "pass":"122",
+        "level":"5",
+        "current_difficulty":"3",
+        "fail_count":"1",
+        "tries":"1,1,1,1,3",
+        "times":"32,30,10,10,10",
+        "diff_played":"3,3,3,3,3",
+        "last":"28-02-21017 18:26",
+    },
+    "visitor":{
+        "score":"0,0,0,0,0",
+        "pass":"123",
+        "level":"1",
+        "current_difficulty":"1",
+        "fail_count":"0",
+        "tries":"0,0,0,0,0",
+        "times":"0,0,0,0,0",
+        "diff_played":"1,1,1,1,1",
+        "last":"",
+    }
+}

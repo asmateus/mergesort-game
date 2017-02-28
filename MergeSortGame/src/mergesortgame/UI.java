@@ -39,6 +39,9 @@ public class UI extends JFrame implements Member
         this.device = device;
         this.screen_size = new Dimension(device.getDisplayMode().getWidth(), device.getDisplayMode().getHeight());
         this.c = this.getContentPane();
+        
+        this.initWatchdog();
+        
         this.init();
     }
     
@@ -56,8 +59,6 @@ public class UI extends JFrame implements Member
             pack();
             setVisible(true);
         }
-        
-        this.initWatchdog();
         
         // Load user data
         this.loadUserData(-1);

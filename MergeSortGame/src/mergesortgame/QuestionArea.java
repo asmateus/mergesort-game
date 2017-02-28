@@ -49,6 +49,14 @@ public class QuestionArea extends JPanel {
         addOptions();
     }
     
+    public void formatQuestion(int index) {
+        this.options.get(index).setForeground(Color.RED);
+    }
+    
+    public ReturnedQuestion getReturnedQuestion() {
+        return this.qr;
+    }
+    
     private void addDescription() {
         c = new GridBagConstraints();
         c.gridx = 0;

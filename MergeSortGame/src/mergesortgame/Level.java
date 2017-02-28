@@ -24,6 +24,11 @@ public abstract class Level extends JPanel implements Member {
     private final Watchdog dog;
     private final int difficulty;
     
+    public int tries_in_level = 0;
+    public int death_in_level = 0;
+    public int score_in_level = 0;
+    public double time_spent_in_level = 0;
+    
     public Level(int difficulty, Watchdog dog) {
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {1};

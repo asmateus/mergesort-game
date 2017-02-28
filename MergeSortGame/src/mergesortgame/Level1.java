@@ -6,6 +6,7 @@
 package mergesortgame;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.FileReader;
 import java.util.ArrayList;
 import javax.swing.JEditorPane;
@@ -17,8 +18,14 @@ import javax.swing.text.html.HTMLEditorKit;
  */
 public class Level1 extends Level {
     
+    private final ActionLevel1 action;
+    private final GameArea master;
+    
     public Level1(GameArea master, Watchdog dog) {
         super(dog.master.getUserDifficulty(), dog);
+        
+        this.master = master;
+        this.action = new ActionLevel1();
         
     }
     
@@ -48,6 +55,7 @@ public class Level1 extends Level {
         
         // Create Question Structure
         this.setQuestionArea(new QuestionArea(question));
+        this.action.setCorrectAnswerIndex(this.getQuestionArea().getReturnedQuestion().index_of_correct);
     }
     
     private void chooseOptions(int diff, ArrayList<String> options) {
@@ -69,9 +77,52 @@ public class Level1 extends Level {
         }
     }
     
+    private void manageUserResponse(int key) {
+        int result = this.action.validateAnswer(key);
+        
+        if(result == Action.IN_ERROR) {
+            this.time_spent_in_level = this.action.getTimeSpent();
+            this.tries_in_level = this.action.getTries();
+            this.death_in_level = this.action.getDeaths();
+            this.master.selfDestroy(Action.IN_ERROR);
+        }
+        else if(result == Action.IN_OK) {
+            this.time_spent_in_level = this.action.getTimeSpent();
+            this.tries_in_level = this.action.getTries();
+            this.death_in_level = this.action.getDeaths();
+            int time_offset = 0;
+            if(this.time_spent_in_level > 60) {
+                time_offset = (int) (this.time_spent_in_level - 60);
+            }
+            this.score_in_level = 1000 - 15*time_offset - 111*this.tries_in_level - 150*this.death_in_level;
+            if(this.score_in_level < 0) {
+                this.score_in_level = 0;
+            }
+            this.master.selfDestroy(Action.IN_OK);
+        }
+        
+        this.getQuestionArea().formatQuestion(key);
+    }
+    
     @Override
     public boolean masterCall(int key) {
-        System.out.println(key);
+        switch(key) {
+            case KeyEvent.VK_1:
+                this.manageUserResponse(0);
+                return true;
+            case KeyEvent.VK_2:
+                this.manageUserResponse(1);
+                return true;
+            case KeyEvent.VK_3:
+                this.manageUserResponse(2);
+                return true;
+            case KeyEvent.VK_4:
+                this.manageUserResponse(3);
+                return true;
+            case KeyEvent.VK_5:
+                this.manageUserResponse(4);
+                return true;
+        }
         return false;
     }
 }
