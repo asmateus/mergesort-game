@@ -59,6 +59,10 @@ public class LevelUP extends Level {
                 cant = 5;
                 break;
             case 3:
+                description = QuestionOptions.QST_LEVEL_3_UP;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_3));
+                correct = QuestionOptions.CORRECT_LEVEL_3_UP;
+                cant = 5;
                 break;
             case 4:
                 break;

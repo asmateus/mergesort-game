@@ -73,6 +73,32 @@
     "0050": "3>4, 4>2, 1>2, 3>2, 3>4",
     "2011": "3>1, 4>2, 1>2, 3>2, 3>4",
     
+    "q300": "At the second div-iteration what is the content of the stack? (Answer structure: [top stack ... bottom stack])",
+    "0051": "[mergeSort {elephant,tiger,rat}, merge, mergeSort {shark,cat}]",
+    "0052": "[mergeSort {dog,cat}, merge, mergeSort {elephant,tiger,rat}]",
+    "0053": "[merge, mergeSort {dog,cat}, merge, mergeSort {elephant,tiger,rat}, merge]",
+    "0054": "[mergeSort {dog,cat}, merge, mergeSort {elephant,tiger}, merge]",
+    "0055": "[mergeSort {dog,cat,elephant}, merge, mergeSort {elephant,tiger,rat}, merge]",
+    "0056": "[mergeSort {dog,cat,elephant}, merge, mergeSort {tiger,rat}, merge]",
+    "0057": "[mergeSort {dog,cat}, merge, merge, mergeSort {elephant,tiger,rat}, merge]",
+    "0058": "[mergeSort {dog}, merge, mergeSort {cat}, merge, mergeSort {elephant,tiger,rat}, merge]",
+    "0059": "[mergeSort {dog}, mergeSort {cat}, mergeSort {elephant,tiger,rat}, merge, merge]",
+    "0060": "[mergeSort {dog}, mergeSort {cat}, mergeSort {elephant,tiger,rat}, merge, merge, merge]",
+    "0061": "[mergeSort {dog}, mergeSort {cat}, mergeSort {elephant}, mergeSort{tiger,rat}]",
+    "3111": "[mergeSort {dog,cat}, merge, mergeSort {elephant,tiger,rat}, merge]",
+    
+    "q301": "What is the content of the stack after fourth div-iteration? (Answer structure: [top stack ... bottom stack])",
+    "3110": "[mergeSort {tiger,rat}, merge]",
+    
+    "q302": "Assume that in the calculations of the midpoint of the list all rounding was done to the upper limit. What would the content of the stack be after second div-iteration? (Answer structure: [top stack ... bottom stack])",
+    "3101": "[mergeSort {cat}, merge, mergeSort {elephant,tiger,rat}, merge]",
+    
+    "q303": "Which part of the mergeSort algorithm assures its stability?",
+    "0062": "The divide left part",
+    "0063": "The divide right part",
+    "0064": "The return when list is unitary",
+    "0065": "All of it",
+    "3011": "The merge part",
     
     "0000": "None of these"
 }
