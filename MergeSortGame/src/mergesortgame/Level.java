@@ -8,6 +8,10 @@ package mergesortgame;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -68,6 +72,15 @@ public abstract class Level extends JPanel implements Member {
         this.question = q;
     }
     
+    public static int decideQuestionLogic() {
+        List<Integer> i = Arrays.asList(new Integer[] {QuestionLogic.NO_ANSWER,
+                                        QuestionLogic.SPECIFIC_ANSWER,
+                                        QuestionLogic.BOTH_ANSWERS});
+        Collections.shuffle(i);
+        
+        return i.get(0);
+    }
+    
     public void setContent() {
         this.setDescriptionArea();
         this.setQuestionArea();
@@ -89,6 +102,31 @@ public abstract class Level extends JPanel implements Member {
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.ABOVE_BASELINE_LEADING;
         this.add(this.getQuestionArea(), c);
+    }
+    
+    public void chooseOptions(int diff, ArrayList<String> options) {
+        String[] opts;
+        switch(diff) {
+            case 1:
+                opts = QuestionOptions.NOOB_LEVEL_1;
+                break;
+            case 2:
+                opts = QuestionOptions.ADVANCED_LEVEL_1;
+                break;
+            case 3:
+                opts = QuestionOptions.LEGENDARY_LEVEL_1;
+                break;
+            case 4:
+                opts = QuestionOptions.LEVEL_UP_1;
+                break;
+            default:
+                opts = QuestionOptions.NOOB_LEVEL_1;
+                break;
+        }
+        
+        for(String e:opts) {
+            options.add(e);
+        }
     }
     
     public abstract void setDescriptionArea();

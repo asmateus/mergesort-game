@@ -52,7 +52,6 @@ public class User {
             this.level = Integer.parseInt(arr.get(User.LEVEL_OFFSET));
             this.diff = Integer.parseInt(arr.get(User.DIFFICULTY_OFFSET));
             this.fail_count = Integer.parseInt(arr.get(User.FAIL_COUNT_OFFSET));
-
             String[] temp = arr.get(User.SCORE_OFFSET).split(",");
             for(int i = 0; i < temp.length; ++i) {
                 this.score[i] = Integer.parseInt(temp[i]);

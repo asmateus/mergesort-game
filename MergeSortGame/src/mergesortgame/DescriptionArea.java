@@ -7,9 +7,10 @@ package mergesortgame;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.io.FileReader;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -22,8 +23,11 @@ public class DescriptionArea extends JScrollPane {
         super(source);
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(600,300));
-        
-
+    }
+    
+    @Override
+    public void setBorder(Border b) {
+        super.setBorder(new EmptyBorder(20,20,20,20));
     }
     
 }

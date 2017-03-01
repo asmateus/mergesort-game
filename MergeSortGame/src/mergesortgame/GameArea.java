@@ -16,10 +16,13 @@ import javax.swing.JPanel;
 public class GameArea extends JPanel implements Bar{
     
     private Level level;
+    private boolean level_up_pending = false;
+    private Watchdog dog;
     private UI ui;
     
     public GameArea(UI ui, Watchdog dog) {
         this.ui = ui;
+        this.dog = dog;
         
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {1};
@@ -29,11 +32,22 @@ public class GameArea extends JPanel implements Bar{
         this.setBackground(Color.BLACK);
         this.setPreferredSize(ui.screen_size);
         
-        configureLevel(dog);
+        this.generateDummyLevel();
+    }
+    
+    public void launchLevel() {
+        this.removeAll();
+        this.configureLevel(dog);
+        this.ui.pack();
     }
     
     private void configureLevel(Watchdog dog) {
-        switch(dog.master.getUserLevel()) {
+        int i = 0;
+        if(this.level_up_pending) {
+            i = 10;
+        }
+        
+        switch(dog.master.getUserLevel()+i) {
             case 1:
                 this.level = new Level1(this, dog);
                 break;
@@ -50,19 +64,73 @@ public class GameArea extends JPanel implements Bar{
                 this.level = new Level1(this, dog);
                 break;
             default:
-                this.level = new Level1(this, dog);
+                this.level = new LevelUP(this, dog);
                 break;
         }
         this.level.setContent();
         this.add(level);
     }
     
+    private void generateDummyLevel() {
+        this.level = new LevelDummy(this, dog);
+        this.level.setContent();
+        this.add(level);
+    }
+    
     private void ascendUser() {
         generalUpdate();
+        if(this.level_up_pending == true) {
+            this.level_up_pending = false;
+            this.simpleLevelUpdate(1, -1);
+            this.generateDummyLevel();
+        }
+        else {
+            this.level_up_pending = true;
+            this.configureLevel(dog);
+        }
+        
     }
     
     private void descendUser() {
+        this.level_up_pending = false;
         generalUpdate();
+        this.simpleLevelUpdate(0, -1);
+        this.generateDummyLevel();
+    }
+    
+    public void simpleLevelUpdate(int direction, int arb) {
+        User user = this.level.getDog().master;
+        int level = user.getUserLevel();
+        // Calculate final level
+        switch(direction) {
+            // Ascending
+            case 1:
+                if(level < 6)
+                    ++level;
+                break;
+            // Descending
+            case 0:
+                if(level > 1)
+                    --level;
+                break;
+            default:
+                if(arb > 0 && arb < 6)
+                    level = arb;
+                break;
+        }
+        
+        IOManager io = new IOManager(user.getUserName());
+        
+        // Updating JSON
+        SimpleUser u = io.lightWeightPullFromOrigin();
+        u.setLevel(level);
+        io.lightWeightPushToOrigin(u);
+        
+        // Update online user
+        user.RequestDataFromOrigin();
+        
+        // Update interface
+        ui.loadUserData(-1);
     }
     
     private void generalUpdate() {
@@ -74,7 +142,10 @@ public class GameArea extends JPanel implements Bar{
         
         // Build and update Score array
         Integer[] t = u.getScores();
-        t[u.getLevel()-1] = this.level.score_in_level;
+        if(this.level_up_pending)
+            t[u.getLevel()-1] += this.level.score_in_level;
+        else
+            t[u.getLevel()-1] = this.level.score_in_level;
         u.setScores(t);
         
         // Update fail_count
@@ -102,15 +173,16 @@ public class GameArea extends JPanel implements Bar{
     
     @Override
     public void selfDestroy(int exit_status) {
+        this.level.getDog().removeMember();
+        this.removeAll();
+        
         if(exit_status == Action.IN_OK) {
             ascendUser();
+            this.ui.pack();
         }
         else {
             descendUser();
+            this.ui.pack();
         }
-        this.level.getDog().removeMember();
-        this.level.setVisible(false);
-        this.level.setEnabled(false);
-        this.removeAll();
     }
 }

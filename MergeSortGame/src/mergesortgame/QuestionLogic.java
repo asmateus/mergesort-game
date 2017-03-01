@@ -33,6 +33,10 @@ public class QuestionLogic {
         return this.question;
     }
     
+    public int getOptionsSize() {
+        return this.answer_option_ids.size();
+    }
+    
     public void addOption(String opt_id) {
         if(!this.answer_option_ids.contains(opt_id)) {
             this.answer_option_ids.add(opt_id);
@@ -96,7 +100,8 @@ public class QuestionLogic {
         }
         
         Collections.shuffle(result);
-        result = result.subList(0, min);
+        if(min > -1)
+            result = result.subList(0, min);
         return result;
     }
 }

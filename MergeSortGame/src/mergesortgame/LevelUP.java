@@ -14,45 +14,57 @@ import javax.swing.JEditorPane;
  *
  * @author asmateus
  */
-public class Level1 extends Level {
+public class LevelUP extends Level {
     
-    private final ActionLevel1 action;
+    private ActionLevelUP action;
     private final GameArea master;
     
-    public Level1(GameArea master, Watchdog dog) {
+    public LevelUP(GameArea master, Watchdog dog) {
         super(dog.master.getUserDifficulty(), dog);
         
         this.master = master;
-        this.action = new ActionLevel1();
-        
+        this.action = new ActionLevelUP();
     }
     
     @Override
     public void setDescriptionArea() {
-        System.out.println();
-        
         JEditorPane content = new JEditorPane();
-        content.setBackground(Color.BLACK);
+        content.setContentType("text/html");
         content.setFocusable(false);
         content.setEditable(false);
-        content.setContentType("text/html");
-        content.setText(DescriptionStrings.getDescriptionLVL1("descriptions/images/"));
-        
+        content.setBackground(Color.BLACK);
+        content.setText(DescriptionStrings.getLevelUPString());
         this.setDescriptionArea(new DescriptionArea(content));
     }
     
     @Override
     public void setQuestionArea() {
         // Create Question Logic
-        ArrayList<String> options = new ArrayList<>();
-        chooseOptions(this.getDifficulty(), options);
+        String description = "";
+        ArrayList<String> opts = new ArrayList<>();
+        String correct = "";
+        switch(this.getDog().master.getUserLevel()) {
+            case 1:
+                description = QuestionOptions.QST_LEVEL_1_UP;
+                chooseOptions(4, opts);
+                correct = QuestionOptions.CORRECT_LEVEL_1_UP;
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                break;
+        }
         QuestionLogic question =
                 new QuestionLogic(
-                        QuestionOptions.NOOB_QST_LEVEL_1,
-                        QuestionOptions.NOOB_CORRECT_LEVEL_1, options);
+                        description,
+                        correct, opts);
         
         // Create Question Structure
-        this.setQuestionArea(new QuestionArea(question, 5, Level.decideQuestionLogic()));
+        this.setQuestionArea(new QuestionArea(question, 2, QuestionLogic.SPECIFIC_ANSWER));
         this.action.setCorrectAnswerIndex(this.getQuestionArea().getReturnedQuestion().index_of_correct);
     }
     
@@ -79,9 +91,8 @@ public class Level1 extends Level {
             }
             this.master.selfDestroy(Action.IN_OK);
         }
-        else {
-            this.getQuestionArea().formatQuestion(key);
-        }
+        
+        this.getQuestionArea().formatQuestion(key);
     }
     
     @Override

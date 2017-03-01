@@ -27,10 +27,7 @@ public class QuestionArea extends JPanel {
     private ArrayList<JLabel> options = new ArrayList<>();
     private JLabel description = new JLabel();
     
-    public QuestionArea(QuestionLogic q) {
-        this.q = q;
-        qr = this.q.pickOptions(QuestionLogic.NO_ANSWER, 5);
-        
+    public QuestionArea(QuestionLogic q, int question_count, int question_type) {
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {1};
         gbl.rowWeights = new double[] {0.2,0.2,0.2,0.2,0.1,0.1};
@@ -38,9 +35,13 @@ public class QuestionArea extends JPanel {
         this.setLayout(gbl);
         this.setBackground(Color.BLACK);
         
-        // Init options and description
-        initOptionsAndDescription();
+        this.q = q;
+        if(question_count > 0) {
+            qr = this.q.pickOptions(question_type, question_count);
         
+            // Init options and description
+            initOptionsAndDescription();
+        }
         styleDescription();
         styleOptions();
         

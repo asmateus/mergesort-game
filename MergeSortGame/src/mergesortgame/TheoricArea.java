@@ -58,13 +58,17 @@ public class TheoricArea extends JPanel {
     }
     
     public void lockCode() {
-        status = false;
-        this.coverSecrets();
+        if(status) {
+            status = false;
+            this.coverSecrets();
+        }
     }
     
     public void unLockCode() {
-        status = true;
-        this.unCoverSecrets();
+        if(!status) {
+            status = true;
+            this.unCoverSecrets();
+        }
     }
     
     public void next() {

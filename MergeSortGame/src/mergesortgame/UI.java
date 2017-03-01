@@ -69,9 +69,6 @@ public class UI extends JFrame implements Member
         this.requestFocusInWindow();
         if(cause == Action.ACTION_LOGIN) {
             this.loadUserData(-1);
-            if(this.dog.master.getUserLevel() > 1) {
-                this.theoric_area.unLockCode();
-            }
         }
         else if(cause == Action.ACTION_REGISTER) {
             
@@ -99,6 +96,13 @@ public class UI extends JFrame implements Member
                 this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(), this.dog.master.getUserScore());
                 this.nav_bar.setDifficultyLabel(this.dog.master.getUserDifficulty());
                 this.nav_bar.setFailCountLabel(this.dog.master.getUserFailCount());
+                this.status_area.printTopPlayers();
+        }
+        if(this.dog.master.getUserLevel() > 1) {
+           this.theoric_area.unLockCode();
+        }
+        else {
+            this.theoric_area.lockCode();
         }
     }
     
@@ -251,6 +255,11 @@ public class UI extends JFrame implements Member
         // Navigate information backwards
         else if(key == KeyEvent.VK_LEFT) {
             this.theoric_area.previous();
+            return true;
+        }
+        // Start level
+        else if(key == KeyEvent.VK_I) {
+            this.game_area.launchLevel();
             return true;
         }
         

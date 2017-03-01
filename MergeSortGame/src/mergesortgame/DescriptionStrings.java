@@ -13,6 +13,52 @@ public class DescriptionStrings {
     
     private final static String path = "file://" + System.getProperty("user.dir") + "/data/";
     
+    public static String getLevelUPString() {
+        String lvlup = ""
+            + "<html>"
+            + "<head>"
+            + "<title></title>"
+            + "<meta content=\"\">"
+            + "<style>"
+            + "body{color:white;}"
+            + "h1{color:yellow;text-align:center;}"
+            + "h3{color:yellow;}"
+            + "div{text-align:center;}"
+            + "p{color:white;}"
+                + "span{font-weight:bold;}"
+            + "</style>"
+            + "</head>"
+            + "<body>"
+            + "<h1>LEVEL UP QUESTION</h1>\n"
+            + "</body>"
+            + "</html>";
+        return lvlup;
+    }
+    
+    public static String getDummyString() {
+        String dummy = ""
+            + "<html>"
+            + "<head>"
+            + "<title></title>"
+            + "<meta content=\"\">"
+            + "<style>"
+            + "body{color:white;}"
+            + "h1{color:yellow;text-align:center;}"
+            + "h2{color:white;text-align:center;}"
+            + "div{text-align:center;}"
+            + "p{color:white;}"
+                + "span{font-weight:bold;}"
+            + "</style>"
+            + "</head>"
+            + "<body>"
+            + "<h1>MERGE SORT</h1>"
+            + "<h2>GAME</h2>"
+            + "<h2>Press I to start level</h2>"
+            + "</body>"
+            + "</html>";
+        return dummy;
+    }
+    
     public static String getDescriptionLVL1(String pth) {
         String lvl1 = ""
             + "<html>"
@@ -31,13 +77,15 @@ public class DescriptionStrings {
             + "<body>"
             + "<h1>LEVEL 1</h1>\n"
             + "<div>"
+            + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"J.png\" alt=\"ERROR\">"
             + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"5.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"Q.png\" alt=\"ERROR\">"
             + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
             + "<img src=\""+path+pth+"3.png\" alt=\"ERROR\">"
-            + "<img src=\""+path+pth+"5.png\" alt=\"ERROR\">"
             + "<img src=\""+path+pth+"8.png\" alt=\"ERROR\">"
-            + "<img src=\""+path+pth+"J.png\" alt=\"ERROR\">"
-            + "<img src=\""+path+pth+"Q.png\" alt=\"ERROR\">"
+            
             + "</div>"
             + "<h3>Description of MergeSort algorithm</h3>"
             + "<p>"

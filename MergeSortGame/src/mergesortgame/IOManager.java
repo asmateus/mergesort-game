@@ -121,6 +121,8 @@ public class IOManager {
     }
     
     public ArrayList<String> pullDataFromOrigin() {
+        this.init_db();
+        
         ArrayList<String> parsed_data = new ArrayList<>();
         if(!this.error_flag) {
             // We need to return a difficulty level, the score array, the level
@@ -142,6 +144,8 @@ public class IOManager {
     }
     
     public void pushDataToOrigin(ArrayList<String> data) {
+        this.init_db();
+        
         if(!this.error_flag) {
             // We need to return a difficulty level, the score array, the level
             // and the fail count
