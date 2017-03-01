@@ -46,13 +46,12 @@ public class GameArea extends JPanel implements Bar{
         if(this.level_up_pending) {
             i = 10;
         }
-        
         switch(dog.master.getUserLevel()+i) {
             case 1:
                 this.level = new Level1(this, dog);
                 break;
             case 2:
-                this.level = new Level1(this, dog);
+                this.level = new Level2(this, dog);
                 break;
             case 3:
                 this.level = new Level1(this, dog);

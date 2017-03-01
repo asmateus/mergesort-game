@@ -104,7 +104,7 @@ public class QuestionArea extends JPanel {
         this.description.setFocusable(false);
         this.description.setEditable(false);
         this.description.setBackground(Color.BLACK);
-        this.description.setPreferredSize(new Dimension(500,50));
+        this.description.setPreferredSize(new Dimension(510,100));
     }
     
     private void styleOptions() {

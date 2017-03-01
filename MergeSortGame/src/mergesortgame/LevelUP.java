@@ -44,13 +44,19 @@ public class LevelUP extends Level {
         String description = "";
         ArrayList<String> opts = new ArrayList<>();
         String correct = "";
+        int cant = 0;
         switch(this.getDog().master.getUserLevel()) {
             case 1:
                 description = QuestionOptions.QST_LEVEL_1_UP;
                 opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_1));
                 correct = QuestionOptions.CORRECT_LEVEL_1_UP;
+                cant = 2;
                 break;
             case 2:
+                description = QuestionOptions.QST_LEVEL_2_UP;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_2));
+                correct = QuestionOptions.CORRECT_LEVEL_2_UP;
+                cant = 5;
                 break;
             case 3:
                 break;
@@ -65,7 +71,7 @@ public class LevelUP extends Level {
                         correct, opts);
         
         // Create Question Structure
-        this.setQuestionArea(new QuestionArea(question, 2, QuestionLogic.SPECIFIC_ANSWER));
+        this.setQuestionArea(new QuestionArea(question, cant, QuestionLogic.SPECIFIC_ANSWER));
         this.action.setCorrectAnswerIndex(this.getQuestionArea().getReturnedQuestion().index_of_correct);
     }
     

@@ -108,4 +108,85 @@ public class DescriptionStrings {
         
         return lvl1;
     }
+    
+    public static String getDescriptionLVL2(String pth) {
+        String lvl2 = ""
+            + "<html>"
+            + "<head>"
+            + "<title></title>"
+            + "<meta content=\"\">"
+            + "<style>"
+            + "body{color:white;}"
+            + "h1{color:yellow;text-align:center;}"
+            + "h3{color:yellow;}"
+            + "div{text-align:center;}"
+            + "p{color:white;}"
+                + "span{font-weight:bold;}"
+            + "</style>"
+            + "</head>"
+            + "<body>"
+            + "<h1>LEVEL 2</h1>\n"
+            + "<div>"
+            + "<img src=\""+path+pth+"red.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"yellow.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"blue.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"pink.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"orange.png\" alt=\"ERROR\">"
+            + "<img src=\""+path+pth+"green.png\" alt=\"ERROR\">"
+            
+            + "</div>"
+            + "<h3>Memory Game</h3>"
+            + "<p>"
+            + "Given the previous set of unknown cards, answer the question."
+            + "</p></body>"
+            + "</html>";
+        
+        return lvl2;
+    }
+    
+    public static String getDescriptionLVL3(String pth) {
+        String lvl3 = ""
+                + "<html>"
+                + "<head>"
+                + "<title></title>"
+                + "<meta content=\"\">"
+                + "<style>"
+                + "body{color:white;}"
+                + "h1{color:yellow;text-align:center;}"
+                + "h3{color:yellow;}"
+                + "div{text-align:center;}"
+                + "p{color:white;}"
+                    + "span{font-weight:bold;}"
+                + "</style>"
+                + "</head>"
+                + "<body>"
+                + "<h1>LEVEL 3</h1>\n"
+                + "<div>"
+                + "<img src=\""+path+pth+"shark.jpg\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"dog.jpg\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"elephant.jpg\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"cat.jpg\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"rat.jpg\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"tiger.jpg\" alt=\"ERROR\">"
+
+                + "</div>"
+                + "<h3>Stack Filling</h3>"
+                + "<p>"
+                + "MergeSort is a recursive algorithm, and as such, its calls can be modeled with a Stack structure like this:"
+                + "</p>"
+                + "<div id=\"s\">"
+                + "<img src=\""+path+pth+"stack.png\" alt=\"ERROR\">"
+                + "</div>"
+                + "<p>"
+                + "For example, when the mergeSort is called with the left side of the list, the merge rutine is pushed to the stack and then the"
+                + "divide right is pushed to the stack."
+                + "</p>"
+                + "<p>"
+                + "With these information answer the following question."
+                + "</p>"
+                + "</body>"
+                + "</html>";
+        
+        return lvl3;
+    }
 }

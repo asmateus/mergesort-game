@@ -39,5 +39,40 @@
     "0028": "No",
     "1011": "Yes",
     
+    "q200": "Given the following relationships :Red > Yellow AND Blue > Red, Pink < Orange AND Orange < Green, Pink > Blue. What is the order of the cards?",
+    "0029": "Y,B,R,P,O,G",
+    "0030": "Y,R,B,O,P,G",
+    "0031": "R,Y,B,P,G,O",
+    "0032": "Y,Y,R,B,P,O",
+    "0033": "P,O,G,R,Y,B",
+    "0034": "R,P,Y,O,B,G",
+    "0035": "R,R,Y,R,B,B",
+    "0036": "Y,R,B,P,G,O",
+    "0037": "Y,B,R,P,G,O",
+    "0038": "O,G,P,R,B,Y",
+    "0039": "O,G,R,P,Y,B",
+    "2111": "Y,R,B,P,O,G",
+    
+    "q201": "Given the following relationships :Red < Yellow AND Blue < Yellow, Pink > Orange AND Pink < Green, Orange > Red AND Green > Blue. What is the order of the cards?",
+    "2110": "R,O,P,G,B,Y",
+    
+    "q202": "Given the following relationships :Red > Pink AND Orange < Green, Yellow < Green AND Pink > Yellow, Orange > Pink AND Red > Green AND Blue < Yellow. What is the order of the cards?",
+    "2101": "B,Y,P,O,G,R",
+    
+    "q203": "Given the list [3,1,4,2] which are the comparations (in order) executed by the MergeSort algorithm?",
+    "0040": "3>1, 3>2, 1>2, 4>2, 3>4",
+    "0041": "4>2, 3>1, 1>2, 3>2, 3>4",
+    "0042": "3>1, 4>2, 1>2, 2>3, 1>4",
+    "0043": "1>3, 1>1, 1>2, 3>2, 3>4",
+    "0044": "1>2, 2>1, 4>2, 3>2, 2>4",
+    "0045": "3>4, 4>2, 1>2, 3>2, 3>1",
+    "0046": "3>1, 1>2, 4>2, 3>2, 3>4",
+    "0047": "3>1, 2>2, 1>2, 3>2, 3>4",
+    "0048": "3>1, 4>2, 2>2, 3>2, 3>4",
+    "0049": "3>1, 4>2, 1>1, 3>2, 3>4",
+    "0050": "3>4, 4>2, 1>2, 3>2, 3>4",
+    "2011": "3>1, 4>2, 1>2, 3>2, 3>4",
+    
+    
     "0000": "None of these"
 }

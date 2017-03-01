@@ -51,9 +51,9 @@ public class Level1 extends Level {
         switch(this.getDog().master.getUserDifficulty()) {
             case 1:
                 this.difficulty_played = 1;
-                description = QuestionOptions.QST_LEVEL_1_UP;
+                description = QuestionOptions.NOOB_QST_LEVEL_1;
                 opts = new ArrayList<>(Arrays.asList(QuestionOptions.NOOB_LEVEL_1));
-                correct = QuestionOptions.CORRECT_LEVEL_1_UP;
+                correct = QuestionOptions.NOOB_CORRECT_LEVEL_1;
                 break;
             case 2:
                 this.difficulty_played = 2;
