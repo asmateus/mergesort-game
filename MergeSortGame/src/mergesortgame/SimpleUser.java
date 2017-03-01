@@ -5,6 +5,8 @@
  */
 package mergesortgame;
 
+import java.util.Arrays;
+
 /**
  *
  * @author asmateus
@@ -15,6 +17,11 @@ public class SimpleUser implements Comparable<SimpleUser> {
     private Integer fail_count = 0;
     private Integer score = 0;
     private Integer level = 1;
+    private Integer[] scores = {0,0,0,0,0};
+    private Integer[] tries = {0,0,0,0,0};
+    private Integer[] diff_played = {0,0,0,0,0};
+    private double[] times = {0,0,0,0,0};
+    private String last_online = "";
     
     public static int calculateScore(String s) {
         String[] ss = s.split(",");
@@ -39,6 +46,34 @@ public class SimpleUser implements Comparable<SimpleUser> {
                 return User.DIFF_MESSAGE_1;
         }
     }
+    
+    public static String joinSparseData(Integer[] data) {
+        String[] datas = new String[data.length];
+        for(int i = 0; i < data.length; ++i) {
+            datas[i] = "" + data[i];
+        }
+        
+        return SimpleUser.joinSparseData(datas);
+    }
+    
+    public static String joinSparseData(double[] data) {
+        String[] datas = new String[data.length];
+        for(int i = 0; i < data.length; ++i) {
+            datas[i] = "" + data[i];
+        }
+        
+        return SimpleUser.joinSparseData(datas);
+    }
+    
+    public static String joinSparseData(String[] data) {
+        String sc = "";
+        for(String e: data) {
+            sc += e + ",";
+        }
+        
+        sc = sc.substring(0, sc.length()-1);
+        return sc;
+    }
 
     public void setUserName(String user_name) {
         this.user_name = user_name;
@@ -60,6 +95,26 @@ public class SimpleUser implements Comparable<SimpleUser> {
         this.level = level;
     }
     
+    public void setScores(Integer[] scores) {
+        this.scores = scores;
+    }
+    
+    public void setTries(Integer[] tries) {
+        this.tries = tries;
+    }
+    
+    public void setTimes(double[] times) {
+        this.times = times;
+    }
+    
+    public void setDiffsPlayed(Integer[] diffs) {
+        this.diff_played = diffs;
+    }
+    
+    public void setLastOnline(String lo) {
+        this.last_online = lo;
+    }
+    
     @Override
     public int compareTo(SimpleUser i) {
         return this.score.compareTo(i.getScore());
@@ -79,6 +134,26 @@ public class SimpleUser implements Comparable<SimpleUser> {
 
     public int getScore() {
         return score;
+    }
+    
+    public Integer[] getScores() {
+        return scores;
+    }
+    
+    public Integer[] getTries() {
+        return tries;
+    }
+    
+    public double[] getTimes() {
+        return times;
+    }
+    
+    public Integer[] getDiffPlayed() {
+        return diff_played;
+    }
+    
+    public String getLastOnline() {
+        return last_online;
     }
 
     public int getLevel() {

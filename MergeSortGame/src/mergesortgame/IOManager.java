@@ -39,6 +39,87 @@ public class IOManager {
         catch(Exception e) {this.error_flag = true;}
     }
     
+    public SimpleUser lightWeightPullFromOrigin() {
+        SimpleUser u = new SimpleUser();
+        u.setUserName(this.user);
+        
+        if(!this.error_flag) {
+            JSONObject obj;
+            try{
+                obj = this.db.getJSONObject(this.user);
+                u.setLevel(Integer.parseInt(obj.getString("level")));
+                u.setDiff(Integer.parseInt(obj.getString("current_difficulty")));
+                u.setFailCount(Integer.parseInt(obj.getString("fail_count")));
+                
+                u.setScore(SimpleUser.calculateScore(obj.getString("score")));
+                String[] sc = obj.getString("score").split(",");
+                Integer[] scs = new Integer[5];
+                
+                for(int i = 0; i < sc.length; ++i) {
+                    scs[i] = Integer.parseInt(sc[i]);
+                }
+                u.setScores(scs);
+                
+                String[] tries = obj.getString("tries").split(",");
+                Integer[] triess = new Integer[5];
+                
+                for(int i = 0; i < sc.length; ++i) {
+                    triess[i] = Integer.parseInt(tries[i]);
+                }
+                u.setTries(triess);
+                
+                String[] diff = obj.getString("diff_played").split(",");
+                Integer[] diffs = new Integer[5];
+                
+                for(int i = 0; i < sc.length; ++i) {
+                    diffs[i] = Integer.parseInt(diff[i]);
+                }
+                u.setDiffsPlayed(diffs);
+                
+                String[] times = obj.getString("times").split(",");
+                double[] timess = new double[5];
+                
+                for(int i = 0; i < sc.length; ++i) {
+                    timess[i] = Double.parseDouble(times[i]);
+                }
+                u.setTimes(timess);
+                
+                u.setLastOnline(obj.getString("last"));
+                
+                this.error_flag = false;
+            }
+            catch(Exception e){this.error_flag = true;}
+        }
+        
+        return u;
+    }
+    
+    public void lightWeightPushToOrigin(SimpleUser u) {
+        if(!this.error_flag) {
+            JSONObject obj;
+            try{
+                obj = this.db.getJSONObject(u.getUserName());
+                obj.put("level", "" + u.getLevel());
+                obj.put("current_difficulty", "" + u.getDiff());
+                obj.put("fail_count", "" + u.getFailCount());
+                obj.put("last", u.getLastOnline());
+                obj.put("score", SimpleUser.joinSparseData(u.getScores()));
+                obj.put("tries", SimpleUser.joinSparseData(u.getTries()));
+                obj.put("times", SimpleUser.joinSparseData(u.getTimes()));
+                obj.put("diff_played", SimpleUser.joinSparseData(u.getDiffPlayed()));
+                
+                this.db.put(this.user, obj);
+                try (FileWriter file = new FileWriter("data/db.json")) 
+                {
+                    file.write(this.db.toString());
+                }
+                
+                this.error_flag = false;
+            }
+            catch(Exception e){this.error_flag = true;}
+        }
+    }
+    
     public ArrayList<String> pullDataFromOrigin() {
         ArrayList<String> parsed_data = new ArrayList<>();
         if(!this.error_flag) {

@@ -42,6 +42,7 @@ public class User {
     public User(String user_name) {
         this.user_name = user_name;
         this.io = new IOManager(user_name);
+        this.RequestDataFromOrigin();
     }
     
     public void RequestDataFromOrigin() {

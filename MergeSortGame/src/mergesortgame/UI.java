@@ -78,7 +78,7 @@ public class UI extends JFrame implements Member
         }
     }
     
-    private void loadUserData(int precision) {
+    public void loadUserData(int precision) {
         switch(precision) {
             case User.LEVEL_OFFSET:
                 this.nav_bar.setUserLevelLabel(this.dog.master.getUserLevel(),

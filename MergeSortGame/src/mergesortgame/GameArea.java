@@ -55,7 +55,6 @@ public class GameArea extends JPanel implements Bar{
         }
         this.level.setContent();
         this.add(level);
-        //this.ui.pack();
     }
     
     private void ascendUser() {
@@ -69,6 +68,36 @@ public class GameArea extends JPanel implements Bar{
     private void generalUpdate() {
         User user = this.level.getDog().master;
         IOManager io = new IOManager(user.getUserName());
+        
+        // Updating JSON
+        SimpleUser u = io.lightWeightPullFromOrigin();
+        
+        // Build and update Score array
+        Integer[] t = u.getScores();
+        t[u.getLevel()-1] = this.level.score_in_level;
+        u.setScores(t);
+        
+        // Update fail_count
+        u.setFailCount(u.getFailCount()+this.level.death_in_level);
+        
+        // Build and update Tries array
+        t = u.getTries();
+        t[u.getLevel()-1] = this.level.tries_in_level;
+        u.setTries(t);
+        
+        // Build and update Times array
+        double[] ti = u.getTimes();
+        ti[u.getLevel()-1] = this.level.time_spent_in_level;
+        u.setTimes(ti);
+        
+        // Write JSON
+        io.lightWeightPushToOrigin(u);
+        
+        // Update online user
+        user.RequestDataFromOrigin();
+        
+        // Update interface
+        ui.loadUserData(-1);
     }
     
     @Override
