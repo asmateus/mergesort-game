@@ -39,9 +39,19 @@ public class GameArea extends JPanel implements Bar{
     }
     
     public void launchLevel() {
+        if(this.dog.master.getUserLevel() < 6) {
+            this.removeAll();
+            this.configureLevel(dog);
+            this.ui.pack();
+        }
+    }
+    
+    public void configureDummies() {
         this.removeAll();
-        this.configureLevel(dog);
-        this.ui.pack();
+        if(this.dog.master.getUserLevel() == 6)
+            this.generateKingLevel();
+        else
+            this.generateDummyLevel();
     }
     
     private void configureLevel(Watchdog dog) {
@@ -164,7 +174,10 @@ public class GameArea extends JPanel implements Bar{
         
         // Build and update Tries array
         t = u.getTries();
-        t[u.getLevel()-1] = this.level.tries_in_level;
+        if(this.level_up_pending)
+            t[u.getLevel()-1] += this.level.tries_in_level;
+        else
+            t[u.getLevel()-1] = this.level.tries_in_level;
         u.setTries(t);
         
         // Update difficulty
@@ -179,7 +192,10 @@ public class GameArea extends JPanel implements Bar{
         
         // Build and update Times array
         double[] ti = u.getTimes();
-        ti[u.getLevel()-1] = this.level.time_spent_in_level;
+        if(this.level_up_pending)
+            ti[u.getLevel()-1] += this.level.time_spent_in_level;
+        else
+            ti[u.getLevel()-1] = this.level.time_spent_in_level;
         u.setTimes(ti);
         
         // Write JSON

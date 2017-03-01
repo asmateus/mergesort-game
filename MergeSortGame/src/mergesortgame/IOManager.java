@@ -36,7 +36,7 @@ public class IOManager {
             
             this.error_flag = false;
         }
-        catch(Exception e) {this.error_flag = true;}
+        catch(Exception e) {this.error_flag = true;System.out.println("Error init");}
     }
     
     public SimpleUser lightWeightPullFromOrigin() {
@@ -88,7 +88,7 @@ public class IOManager {
                 
                 this.error_flag = false;
             }
-            catch(Exception e){this.error_flag = true;}
+            catch(Exception e){this.error_flag = true;System.out.println("Error light pull");}
         }
         
         return u;
@@ -116,7 +116,7 @@ public class IOManager {
                 
                 this.error_flag = false;
             }
-            catch(Exception e){this.error_flag = true;}
+            catch(Exception e){this.error_flag = true; System.out.println("Error light push");}
         }
     }
     
@@ -138,7 +138,7 @@ public class IOManager {
                 
                 this.error_flag = false;
             }
-            catch(Exception e){this.error_flag = true;}
+            catch(Exception e){this.error_flag = true; System.out.println("Error pull");}
         }
         return parsed_data;
     }
@@ -166,7 +166,7 @@ public class IOManager {
                 
                 this.error_flag = false;
             }
-            catch(Exception e){this.error_flag = true;}
+            catch(Exception e){this.error_flag = true; System.out.println("Error push");}
         }
     }
     
@@ -182,6 +182,11 @@ public class IOManager {
                 obj.put("current_difficulty", "1");
                 obj.put("fail_count", "0");
                 obj.put("score", "0,0,0,0,0");
+                obj.put("tries", "0,0,0,0,0");
+                obj.put("times", "0,0,0,0,0");
+                obj.put("diff_played", "1,1,1,1,1");
+                obj.put("last", "");
+                
                 this.db.put(this.user, obj);
                 try (FileWriter file = new FileWriter("data/db.json")) 
                 {
@@ -191,6 +196,7 @@ public class IOManager {
                 this.error_flag = false;
             }
             catch(Exception e) {
+                System.out.println("Error create fields");
                 this.error_flag = true;
             }
         }

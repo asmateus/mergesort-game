@@ -122,6 +122,10 @@ public class Level1 extends Level {
             case KeyEvent.VK_5:
                 this.manageUserResponse(4);
                 return true;
+            case KeyEvent.VK_K:
+                this.death_in_level = 1;
+                this.master.selfDestroy(Action.IN_ERROR);
+                return true;
         }
         return false;
     }

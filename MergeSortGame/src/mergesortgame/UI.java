@@ -7,6 +7,9 @@ import java.awt.GraphicsDevice;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -30,6 +33,7 @@ public class UI extends JFrame implements Member
     
     private boolean fullscreen_support;
     private boolean active_flex_bar = false;
+    private boolean custom_level_attempt = false;
     
     public boolean active_user_session = false;
     
@@ -69,6 +73,7 @@ public class UI extends JFrame implements Member
         this.requestFocusInWindow();
         if(cause == Action.ACTION_LOGIN) {
             this.loadUserData(-1);
+            this.game_area.configureDummies();
         }
         else if(cause == Action.ACTION_REGISTER) {
             
@@ -206,8 +211,84 @@ public class UI extends JFrame implements Member
         this.addKeyListener(this.dog);
     }
     
+    private void quit() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String d = dateFormat.format(date);
+        
+        IOManager io = new IOManager(this.dog.master.getUserName());
+        SimpleUser u = io.lightWeightPullFromOrigin();
+        u.setLastOnline(d);
+        io.lightWeightPushToOrigin(u);
+        
+        System.exit(0);
+    }
+    
+    private void updateUserLevel(int i) {
+        IOManager io = new IOManager(this.dog.master.getUserName());
+        SimpleUser u = io.lightWeightPullFromOrigin();
+        u.setLevel(i);
+        io.lightWeightPushToOrigin(u);
+        this.dog.master.RequestDataFromOrigin();
+        this.loadUserData(-1);
+        this.game_area.launchLevel();
+    }
+    
     @Override
     public boolean masterCall(int key) {
+        // Start custom level
+        if(key == KeyEvent.VK_O) {
+            if(this.custom_level_attempt)
+                this.custom_level_attempt = false;
+            else
+                this.custom_level_attempt = true;
+            return true;
+        }
+        else if(key == KeyEvent.VK_1) {
+            if(this.custom_level_attempt) {
+                this.custom_level_attempt = false;
+                if(this.dog.master.getUserLevel() >= 1) {
+                    this.updateUserLevel(1);
+                }
+            }
+            return true;
+        }
+        else if(key == KeyEvent.VK_2) {
+            if(this.custom_level_attempt) {
+                this.custom_level_attempt = false;
+                if(this.dog.master.getUserLevel() >= 2) {
+                    this.updateUserLevel(2);
+                }
+            }
+            return true;
+        }
+        else if(key == KeyEvent.VK_3) {
+            if(this.custom_level_attempt) {
+                this.custom_level_attempt = false;
+                if(this.dog.master.getUserLevel() >= 3) {
+                    this.updateUserLevel(3);
+                }
+            }
+        }
+        else if(key == KeyEvent.VK_4) {
+            if(this.custom_level_attempt) {
+                this.custom_level_attempt = false;
+                if(this.dog.master.getUserLevel() >= 4) {
+                    this.updateUserLevel(4);
+                }
+            }
+            return true;
+        }
+        else if(key == KeyEvent.VK_5) {
+            if(this.custom_level_attempt) {
+                this.custom_level_attempt = false;
+                if(this.dog.master.getUserLevel() >= 5) {
+                    this.updateUserLevel(5);
+                }
+            }
+            return true;
+        }
+        this.custom_level_attempt = false;
         // Login
         if(key == KeyEvent.VK_L) {
             if(!active_user_session) {
@@ -260,6 +341,11 @@ public class UI extends JFrame implements Member
         // Start level
         else if(key == KeyEvent.VK_I) {
             this.game_area.launchLevel();
+            return true;
+        }
+        // Quit
+        else if(key == KeyEvent.VK_Q) {
+            this.quit();
             return true;
         }
         
