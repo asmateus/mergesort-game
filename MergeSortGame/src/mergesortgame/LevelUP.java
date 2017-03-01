@@ -8,6 +8,7 @@ package mergesortgame;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JEditorPane;
 
 /**
@@ -46,7 +47,7 @@ public class LevelUP extends Level {
         switch(this.getDog().master.getUserLevel()) {
             case 1:
                 description = QuestionOptions.QST_LEVEL_1_UP;
-                chooseOptions(4, opts);
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_1));
                 correct = QuestionOptions.CORRECT_LEVEL_1_UP;
                 break;
             case 2:

@@ -8,6 +8,7 @@ package mergesortgame;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JEditorPane;
 
 /**
@@ -44,12 +45,31 @@ public class Level1 extends Level {
     @Override
     public void setQuestionArea() {
         // Create Question Logic
-        ArrayList<String> options = new ArrayList<>();
-        chooseOptions(this.getDifficulty(), options);
+        String description = "";
+        ArrayList<String> opts = new ArrayList<>();
+        String correct = "";
+        switch(this.getDog().master.getUserDifficulty()) {
+            case 1:
+                this.difficulty_played = 1;
+                description = QuestionOptions.QST_LEVEL_1_UP;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.NOOB_LEVEL_1));
+                correct = QuestionOptions.CORRECT_LEVEL_1_UP;
+                break;
+            case 2:
+                this.difficulty_played = 2;
+                description = QuestionOptions.ADVANCED_QST_LEVEL_1;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.ADVANCED_LEVEL_1));
+                correct = QuestionOptions.ADVANCED_CORRECT_LEVEL_1;
+                break;
+            case 3:
+                this.difficulty_played = 3;
+                description = QuestionOptions.LEGENDARY_QST_LEVEL_1;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEGENDARY_LEVEL_1));
+                correct = QuestionOptions.LEGENDARY_CORRECT_LEVEL_1;
+                break;
+        }
         QuestionLogic question =
-                new QuestionLogic(
-                        QuestionOptions.NOOB_QST_LEVEL_1,
-                        QuestionOptions.NOOB_CORRECT_LEVEL_1, options);
+                new QuestionLogic(description, correct, opts);
         
         // Create Question Structure
         this.setQuestionArea(new QuestionArea(question, 5, Level.decideQuestionLogic()));

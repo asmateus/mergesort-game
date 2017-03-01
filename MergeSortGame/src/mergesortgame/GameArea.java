@@ -156,6 +156,16 @@ public class GameArea extends JPanel implements Bar{
         t[u.getLevel()-1] = this.level.tries_in_level;
         u.setTries(t);
         
+        // Update difficulty
+        u.setDiff(user.getUserDifficulty());
+        
+        //Update difficulties played
+        if(this.level.difficulty_played != 0) {
+            t = u.getDiffPlayed();
+            t[u.getLevel()-1] = user.getUserDifficulty();
+            u.setDiffsPlayed(t);
+        }
+        
         // Build and update Times array
         double[] ti = u.getTimes();
         ti[u.getLevel()-1] = this.level.time_spent_in_level;

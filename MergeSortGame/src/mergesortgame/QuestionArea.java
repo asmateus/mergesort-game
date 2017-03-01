@@ -6,12 +6,14 @@
 package mergesortgame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -25,7 +27,7 @@ public class QuestionArea extends JPanel {
     private GridBagConstraints c;
     
     private ArrayList<JLabel> options = new ArrayList<>();
-    private JLabel description = new JLabel();
+    private JTextArea description = new JTextArea();
     
     public QuestionArea(QuestionLogic q, int question_count, int question_type) {
         GridBagLayout gbl = new GridBagLayout();
@@ -98,6 +100,11 @@ public class QuestionArea extends JPanel {
         this.description.setFont(this.getFont().deriveFont(Font.BOLD, 16f));
         this.description.setBorder(new EmptyBorder(5,5,5,5));
         this.description.setForeground(Color.YELLOW);
+        this.description.setLineWrap(true);
+        this.description.setFocusable(false);
+        this.description.setEditable(false);
+        this.description.setBackground(Color.BLACK);
+        this.description.setPreferredSize(new Dimension(500,50));
     }
     
     private void styleOptions() {

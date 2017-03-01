@@ -31,6 +31,7 @@ public abstract class Level extends JPanel implements Member {
     public int tries_in_level = 0;
     public int death_in_level = 0;
     public int score_in_level = 0;
+    public int difficulty_played = 0;
     public double time_spent_in_level = 0;
     
     public Level(int difficulty, Watchdog dog) {
@@ -102,31 +103,6 @@ public abstract class Level extends JPanel implements Member {
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.ABOVE_BASELINE_LEADING;
         this.add(this.getQuestionArea(), c);
-    }
-    
-    public void chooseOptions(int diff, ArrayList<String> options) {
-        String[] opts;
-        switch(diff) {
-            case 1:
-                opts = QuestionOptions.NOOB_LEVEL_1;
-                break;
-            case 2:
-                opts = QuestionOptions.ADVANCED_LEVEL_1;
-                break;
-            case 3:
-                opts = QuestionOptions.LEGENDARY_LEVEL_1;
-                break;
-            case 4:
-                opts = QuestionOptions.LEVEL_UP_1;
-                break;
-            default:
-                opts = QuestionOptions.NOOB_LEVEL_1;
-                break;
-        }
-        
-        for(String e:opts) {
-            options.add(e);
-        }
     }
     
     public abstract void setDescriptionArea();
