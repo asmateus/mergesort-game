@@ -57,10 +57,10 @@ public class GameArea extends JPanel implements Bar{
                 this.level = new Level3(this, dog);
                 break;
             case 4:
-                this.level = new Level1(this, dog);
+                this.level = new Level4(this, dog);
                 break;
             case 5:
-                this.level = new Level1(this, dog);
+                this.level = new Level5(this, dog);
                 break;
             default:
                 this.level = new LevelUP(this, dog);

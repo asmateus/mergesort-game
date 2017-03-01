@@ -189,4 +189,98 @@ public class DescriptionStrings {
         
         return lvl3;
     }
+    
+    public static String getDescriptionLVL4(String pth) {
+        String lvl4 = ""
+                + "<html>"
+                + "<head>"
+                + "<title></title>"
+                + "<meta content=\"\">"
+                + "<style>"
+                + "body{color:white;}"
+                + "h1{color:yellow;text-align:center;}"
+                + "h3{color:yellow;}"
+                + "div{text-align:center;}"
+                + "p{color:white;}"
+                    + "span{font-weight:bold;}"
+                + "</style>"
+                + "</head>"
+                + "<body>"
+                + "<h1>LEVEL 4</h1>\n"
+                + "<h3>Left list</h3>\n"
+                + "<div>"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"3.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"5.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"J.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"Q.png\" alt=\"ERROR\">"
+
+                + "</div>"
+                + "<h3>Right list</h3>\n"
+                + "<div>"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"3.png\" alt=\"ERROR\">"
+
+                + "</div>"
+                + "<h3>Merging lists</h3>"
+                + "<p>"
+                + "Up until now we have looked at the divide step of MergeSort, now we will delve in the merge part. Answer the question."
+                + "</p>"
+                + "</body>"
+                + "</html>";
+        
+        return lvl4;
+    }
+    
+    public static String getDescriptionLVL5(String pth) {
+        String lvl5 = ""
+                + "<html>"
+                + "<head>"
+                + "<title></title>"
+                + "<meta content=\"\">"
+                + "<style>"
+                + "body{color:white;}"
+                + "h1{color:yellow;text-align:center;}"
+                + "h3{color:yellow;}"
+                + "div{text-align:center;}"
+                + "p{color:white;}"
+                    + "span{font-weight:bold;}"
+                + "</style>"
+                + "</head>"
+                + "<body>"
+                + "<h1>LEVEL 5</h1>\n"
+                + "<h3>Left list</h3>\n"
+                + "<div>"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"3.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"5.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"J.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"Q.png\" alt=\"ERROR\">"
+
+                + "</div>"
+                + "<h3>Right list</h3>\n"
+                + "<div>"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"1.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"2.png\" alt=\"ERROR\">"
+                + "<img src=\""+path+pth+"3.png\" alt=\"ERROR\">"
+
+                + "</div>"
+                + "<h3>Extending lists</h3>"
+                + "<p>"
+                + "Up until now we have looked at the divide step of MergeSort, now we will delve in the merge part. Answer the question."
+                + "</p>"
+                + "</body>"
+                + "</html>";
+        
+        return lvl5;
+    }
 }

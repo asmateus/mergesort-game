@@ -15,26 +15,29 @@ import javax.swing.JEditorPane;
  *
  * @author asmateus
  */
-public class LevelUP extends Level {
-    
-    private ActionLevelUP action;
+public class Level4 extends Level {
+    private final ActionLevel1 action;
     private final GameArea master;
     
-    public LevelUP(GameArea master, Watchdog dog) {
+    public Level4(GameArea master, Watchdog dog) {
         super(dog.master.getUserDifficulty(), dog);
         
         this.master = master;
-        this.action = new ActionLevelUP();
+        this.action = new ActionLevel1();
+        
     }
     
     @Override
     public void setDescriptionArea() {
+        System.out.println();
+        
         JEditorPane content = new JEditorPane();
-        content.setContentType("text/html");
+        content.setBackground(Color.BLACK);
         content.setFocusable(false);
         content.setEditable(false);
-        content.setBackground(Color.BLACK);
-        content.setText(DescriptionStrings.getLevelUPString());
+        content.setContentType("text/html");
+        content.setText(DescriptionStrings.getDescriptionLVL4("descriptions/images/"));
+        
         this.setDescriptionArea(new DescriptionArea(content));
     }
     
@@ -44,46 +47,31 @@ public class LevelUP extends Level {
         String description = "";
         ArrayList<String> opts = new ArrayList<>();
         String correct = "";
-        int cant = 0;
-        switch(this.getDog().master.getUserLevel()) {
+        switch(this.getDog().master.getUserDifficulty()) {
             case 1:
-                description = QuestionOptions.QST_LEVEL_1_UP;
-                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_1));
-                correct = QuestionOptions.CORRECT_LEVEL_1_UP;
-                cant = 2;
+                this.difficulty_played = 1;
+                description = QuestionOptions.NOOB_QST_LEVEL_4;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.NOOB_LEVEL_4));
+                correct = QuestionOptions.NOOB_CORRECT_LEVEL_4;
                 break;
             case 2:
-                description = QuestionOptions.QST_LEVEL_2_UP;
-                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_2));
-                correct = QuestionOptions.CORRECT_LEVEL_2_UP;
-                cant = 5;
+                this.difficulty_played = 2;
+                description = QuestionOptions.ADVANCED_QST_LEVEL_4;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.ADVANCED_LEVEL_4));
+                correct = QuestionOptions.ADVANCED_CORRECT_LEVEL_4;
                 break;
             case 3:
-                description = QuestionOptions.QST_LEVEL_3_UP;
-                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_3));
-                correct = QuestionOptions.CORRECT_LEVEL_3_UP;
-                cant = 5;
-                break;
-            case 4:
-                description = QuestionOptions.QST_LEVEL_4_UP;
-                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_4));
-                correct = QuestionOptions.CORRECT_LEVEL_4_UP;
-                cant = 5;
-                break;
-            default:
-                description = QuestionOptions.QST_LEVEL_5_UP;
-                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEVEL_UP_5));
-                correct = QuestionOptions.CORRECT_LEVEL_5_UP;
-                cant = 5;
+                this.difficulty_played = 3;
+                description = QuestionOptions.LEGENDARY_QST_LEVEL_4;
+                opts = new ArrayList<>(Arrays.asList(QuestionOptions.LEGENDARY_LEVEL_4));
+                correct = QuestionOptions.LEGENDARY_CORRECT_LEVEL_4;
                 break;
         }
         QuestionLogic question =
-                new QuestionLogic(
-                        description,
-                        correct, opts);
+                new QuestionLogic(description, correct, opts);
         
         // Create Question Structure
-        this.setQuestionArea(new QuestionArea(question, cant, QuestionLogic.SPECIFIC_ANSWER));
+        this.setQuestionArea(new QuestionArea(question, 5, Level.decideQuestionLogic()));
         this.action.setCorrectAnswerIndex(this.getQuestionArea().getReturnedQuestion().index_of_correct);
     }
     
@@ -110,8 +98,9 @@ public class LevelUP extends Level {
             }
             this.master.selfDestroy(Action.IN_OK);
         }
-        
-        this.getQuestionArea().formatQuestion(key);
+        else {
+            this.getQuestionArea().formatQuestion(key);
+        }
     }
     
     @Override

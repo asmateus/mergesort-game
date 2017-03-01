@@ -24,6 +24,15 @@ public class QuestionOptions {
     public static final String NOOB_CORRECT_LEVEL_3 = "3111";
     public static final String ADVANCED_CORRECT_LEVEL_3 = "3110";
     public static final String LEGENDARY_CORRECT_LEVEL_3 = "3101";
+    public static final String CORRECT_LEVEL_4_UP = "4011";
+    public static final String NOOB_CORRECT_LEVEL_4 = "4111";
+    public static final String ADVANCED_CORRECT_LEVEL_4 = "4110";
+    public static final String LEGENDARY_CORRECT_LEVEL_4 = "4101";
+    public static final String CORRECT_LEVEL_5_UP = "5011";
+    public static final String NOOB_CORRECT_LEVEL_5 = "5111";
+    public static final String ADVANCED_CORRECT_LEVEL_5 = "5110";
+    public static final String LEGENDARY_CORRECT_LEVEL_5 = "5101";
+    
     
     public static final String NOOB_QST_LEVEL_1 = "q000";
     public static final String ADVANCED_QST_LEVEL_1 = "q001";
@@ -39,6 +48,16 @@ public class QuestionOptions {
     public static final String ADVANCED_QST_LEVEL_3 = "q301";
     public static final String LEGENDARY_QST_LEVEL_3 = "q302";
     public static final String QST_LEVEL_3_UP = "q303";
+    
+    public static final String NOOB_QST_LEVEL_4 = "q400";
+    public static final String ADVANCED_QST_LEVEL_4 = "q401";
+    public static final String LEGENDARY_QST_LEVEL_4 = "q402";
+    public static final String QST_LEVEL_4_UP = "q403";
+    
+    public static final String NOOB_QST_LEVEL_5 = "q500";
+    public static final String ADVANCED_QST_LEVEL_5 = "q501";
+    public static final String LEGENDARY_QST_LEVEL_5 = "q502";
+    public static final String QST_LEVEL_5_UP = "q503";
     
     
     public static final String[] NOOB_LEVEL_1 = {
@@ -83,5 +102,33 @@ public class QuestionOptions {
     
     public static final String[] LEVEL_UP_3 = {
         "0062","0063","0064","0065"
+    };
+    
+    public static final String[] NOOB_LEVEL_4 = {
+        "0066","0067","0068","0069","0070","0071","0072","0073","0074"
+    };
+    public static final String[] ADVANCED_LEVEL_4 = {
+        "0075","0076","0077","0078","0079","0080","0081","0082","0083"
+    };
+    public static final String[] LEGENDARY_LEVEL_4 = {
+        "0084","0085","0086","0087","0088","0089","0090","0091","0092"
+    };
+    
+    public static final String[] LEVEL_UP_4 = {
+        "0093","0094","0095","0096"
+    };
+    
+    public static final String[] NOOB_LEVEL_5 = {
+        "0097","0098","0099","0100","0101","0102","0103","0104","0105"
+    };
+    public static final String[] ADVANCED_LEVEL_5 = {
+        "0106","0107","0108","0109","0110","0111","0112","0113","0114"
+    };
+    public static final String[] LEGENDARY_LEVEL_5 = {
+        "0115","0116","0117","0118","0119","0120","0121","0122","0123"
+    };
+    
+    public static final String[] LEVEL_UP_5 = {
+        "0124","0125","0126","0127"
     };
 }
