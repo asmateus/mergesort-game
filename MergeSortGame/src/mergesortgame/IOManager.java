@@ -39,6 +39,15 @@ public class IOManager {
         catch(Exception e) {this.error_flag = true;System.out.println("Error init");}
     }
     
+    private String pullDependent(JSONObject obj, String key_root, int dependency) {
+        String give_back = obj.getString(key_root+dependency);
+        return give_back;
+    }
+    
+    private void pushDependent(JSONObject obj, String key_root, int dependency, String value) {
+        obj.put(key_root+dependency, value);
+    }
+    
     public SimpleUser lightWeightPullFromOrigin() {
         SimpleUser u = new SimpleUser();
         u.setUserName(this.user);
@@ -51,8 +60,8 @@ public class IOManager {
                 u.setDiff(Integer.parseInt(obj.getString("current_difficulty")));
                 u.setFailCount(Integer.parseInt(obj.getString("fail_count")));
                 
-                u.setScore(SimpleUser.calculateScore(obj.getString("score")));
-                String[] sc = obj.getString("score").split(",");
+                u.setScore(SimpleUser.calculateScore(this.pullDependent(obj, "score", u.getDiff())));
+                String[] sc = this.pullDependent(obj, "score", u.getDiff()).split(",");
                 Integer[] scs = new Integer[5];
                 
                 for(int i = 0; i < sc.length; ++i) {
@@ -60,7 +69,7 @@ public class IOManager {
                 }
                 u.setScores(scs);
                 
-                String[] tries = obj.getString("tries").split(",");
+                String[] tries = this.pullDependent(obj, "tries", u.getDiff()).split(",");
                 Integer[] triess = new Integer[5];
                 
                 for(int i = 0; i < sc.length; ++i) {
@@ -76,7 +85,7 @@ public class IOManager {
                 }
                 u.setDiffsPlayed(diffs);
                 
-                String[] times = obj.getString("times").split(",");
+                String[] times = this.pullDependent(obj, "times", u.getDiff()).split(",");
                 double[] timess = new double[5];
                 
                 for(int i = 0; i < sc.length; ++i) {
@@ -103,9 +112,9 @@ public class IOManager {
                 obj.put("current_difficulty", "" + u.getDiff());
                 obj.put("fail_count", "" + u.getFailCount());
                 obj.put("last", u.getLastOnline());
-                obj.put("score", SimpleUser.joinSparseData(u.getScores()));
-                obj.put("tries", SimpleUser.joinSparseData(u.getTries()));
-                obj.put("times", SimpleUser.joinSparseData(u.getTimes()));
+                this.pushDependent(obj, "score", u.getDiff(), SimpleUser.joinSparseData(u.getScores()));
+                this.pushDependent(obj, "tries", u.getDiff(), SimpleUser.joinSparseData(u.getTries()));
+                this.pushDependent(obj, "times", u.getDiff(), SimpleUser.joinSparseData(u.getTimes()));
                 obj.put("diff_played", SimpleUser.joinSparseData(u.getDiffPlayed()));
                 
                 this.db.put(this.user, obj);
@@ -131,10 +140,11 @@ public class IOManager {
             JSONObject obj;
             try{
                 obj = this.db.getJSONObject(this.user);
+                int dif = Integer.parseInt(obj.getString("current_difficulty"));
                 parsed_data.add(obj.getString("level"));
                 parsed_data.add(obj.getString("current_difficulty"));
                 parsed_data.add(obj.getString("fail_count"));
-                parsed_data.add(obj.getString("score"));
+                parsed_data.add(this.pullDependent(obj, "score", dif));
                 
                 this.error_flag = false;
             }
@@ -156,7 +166,9 @@ public class IOManager {
                 obj.put("level", data.get(User.LEVEL_OFFSET));
                 obj.put("current_difficulty", data.get(User.DIFFICULTY_OFFSET));
                 obj.put("fail_count", data.get(User.FAIL_COUNT_OFFSET));
-                obj.put("score", data.get(User.SCORE_OFFSET));
+                this.pushDependent(obj, 
+                        "socre", Integer.parseInt(data.get(User.DIFFICULTY_OFFSET)), 
+                        data.get(User.SCORE_OFFSET));
                 
                 this.db.put(this.user, obj);
                 try (FileWriter file = new FileWriter("data/db.json")) 
@@ -181,9 +193,15 @@ public class IOManager {
                 obj.put("level", "1");
                 obj.put("current_difficulty", "1");
                 obj.put("fail_count", "0");
-                obj.put("score", "0,0,0,0,0");
-                obj.put("tries", "0,0,0,0,0");
-                obj.put("times", "0,0,0,0,0");
+                obj.put("score1", "0,0,0,0,0");
+                obj.put("score2", "0,0,0,0,0");
+                obj.put("score3", "0,0,0,0,0");
+                obj.put("tries1", "0,0,0,0,0");
+                obj.put("tries2", "0,0,0,0,0");
+                obj.put("tries3", "0,0,0,0,0");
+                obj.put("times1", "0,0,0,0,0");
+                obj.put("times2", "0,0,0,0,0");
+                obj.put("times3", "0,0,0,0,0");
                 obj.put("diff_played", "1,1,1,1,1");
                 obj.put("last", "");
                 
@@ -212,7 +230,7 @@ public class IOManager {
         catch(Exception e) {return "";} 
     }
     
-    public ArrayList<SimpleUser> getTopPlayers(int amount) {
+    public ArrayList<SimpleUser> getTopPlayers(int amount, int diff_base) {
         ArrayList<SimpleUser> scores = new ArrayList<>();
         ArrayList<SimpleUser> returnarray = new ArrayList<>();
         String next;
@@ -229,7 +247,7 @@ public class IOManager {
             u.setDiff(Integer.parseInt(obj.getString("current_difficulty")));
             u.setFailCount(Integer.parseInt(obj.getString("fail_count")));
             u.setLevel(Integer.parseInt(obj.getString("level")));
-            u.setScore(SimpleUser.calculateScore(obj.getString("score")));
+            u.setScore(SimpleUser.calculateScore(this.pullDependent(obj, "score", diff_base)));
             
             scores.add(u);
         }
@@ -243,5 +261,10 @@ public class IOManager {
         }
         
         return returnarray;
+    }
+    
+    public void passToExcel() {
+        SimpleUser u = this.lightWeightPullFromOrigin();
+        u.getUserName();
     }
 }

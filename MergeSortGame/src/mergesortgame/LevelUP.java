@@ -104,10 +104,11 @@ public class LevelUP extends Level {
             if(this.time_spent_in_level > 60) {
                 time_offset = (int) (this.time_spent_in_level - 60);
             }
+            /*
             this.score_in_level = 1000 - 15*time_offset - 111*this.tries_in_level - 150*this.death_in_level;
             if(this.score_in_level < 0) {
                 this.score_in_level = 0;
-            }
+            }*/
             this.master.selfDestroy(Action.IN_OK);
         }
         

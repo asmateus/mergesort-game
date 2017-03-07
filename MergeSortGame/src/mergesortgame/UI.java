@@ -160,7 +160,7 @@ public class UI extends JFrame implements Member
         cons.fill = GridBagConstraints.BOTH;
         cons.anchor = GridBagConstraints.PAGE_START;
         
-        status_area = new StatusArea();
+        status_area = new StatusArea(this.dog);
         c.add(status_area, cons);
         
         // Create and add Game area
@@ -221,13 +221,16 @@ public class UI extends JFrame implements Member
         u.setLastOnline(d);
         io.lightWeightPushToOrigin(u);
         
+        io.passToExcel();
+        
         System.exit(0);
     }
     
-    private void updateUserLevel(int i) {
+    public void updateUserLevel(int i) {
         IOManager io = new IOManager(this.dog.master.getUserName());
         SimpleUser u = io.lightWeightPullFromOrigin();
         u.setLevel(i);
+        u.setDiff(this.dog.master.getUserDifficulty());
         io.lightWeightPushToOrigin(u);
         this.dog.master.RequestDataFromOrigin();
         this.loadUserData(-1);
@@ -314,18 +317,6 @@ public class UI extends JFrame implements Member
                 this.createRegisterInterface();
             }
             
-            return true;
-        }
-        // Increase difficulty
-        else if(key == KeyEvent.VK_PLUS) {
-            this.dog.master.upDifficulty();
-            this.loadUserData(User.DIFFICULTY_OFFSET);
-            return true;
-        }
-        // Decrease difficulty
-        else if(key == KeyEvent.VK_MINUS) {
-            this.dog.master.lowerDifficulty();
-            this.loadUserData(User.DIFFICULTY_OFFSET);
             return true;
         }
         // Navigate information forward

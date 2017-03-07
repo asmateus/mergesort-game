@@ -14,8 +14,12 @@ import javax.swing.JEditorPane;
  * @author asmateus
  */
 public class LevelKing extends Level {
-    public LevelKing(GameArea g, Watchdog dog) {
+    
+    private int level = 1;
+    
+    public LevelKing(GameArea g, Watchdog dog, int level) {
         super(dog.master.getUserLevel(), dog);
+        this.level = level;
         
         dog.removeMember();
     }
@@ -28,7 +32,19 @@ public class LevelKing extends Level {
         content.setFocusable(false);
         content.setEditable(false);
         content.setBackground(Color.BLACK);
-        content.setText(DescriptionStrings.getKingString("descriptions/images/"));
+        
+        switch(level) {
+            case 1:
+                content.setText(DescriptionStrings.getKingNoobString("descriptions/images/"));
+                break;
+            case 2:
+                content.setText(DescriptionStrings.getKingAdvancedString("descriptions/images/"));
+                break;
+            case 3:
+                content.setText(DescriptionStrings.getKingLegendaryString("descriptions/images/"));
+                break;
+        }
+        
         this.setDescriptionArea(new DescriptionArea(content));
     }
     

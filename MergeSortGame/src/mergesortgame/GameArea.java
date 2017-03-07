@@ -32,14 +32,29 @@ public class GameArea extends JPanel implements Bar{
         this.setBackground(Color.BLACK);
         this.setPreferredSize(ui.screen_size);
         
-        if(this.dog.master.getUserLevel() == 6)
-            this.generateKingLevel();
+        if(this.dog.master.getUserLevel() == 6) {
+            switch(this.dog.master.getUserDifficulty()) {
+                case 1:
+                    this.generateKingLevelNoob();
+                    break;
+                case 2:
+                    this.generateKingLevelAdvanced();
+                    break;
+                case 3:
+                    this.generateKingLevelLegendary();
+                    break;
+            }
+        }
         else
             this.generateDummyLevel();
     }
     
     public void launchLevel() {
-        if(this.dog.master.getUserLevel() < 6) {
+        if(this.dog.master.getUserLevel() < 6 || this.dog.master.getUserDifficulty() != 3) {
+            if(this.dog.master.getUserLevel() == 6) {
+                this.dog.master.upDifficulty();
+                this.ui.updateUserLevel(1);
+            }
             this.removeAll();
             this.configureLevel(dog);
             this.ui.pack();
@@ -49,7 +64,17 @@ public class GameArea extends JPanel implements Bar{
     public void configureDummies() {
         this.removeAll();
         if(this.dog.master.getUserLevel() == 6)
-            this.generateKingLevel();
+            switch(this.dog.master.getUserDifficulty()) {
+                case 1:
+                    this.generateKingLevelNoob();
+                    break;
+                case 2:
+                    this.generateKingLevelAdvanced();
+                    break;
+                case 3:
+                    this.generateKingLevelLegendary();
+                    break;
+            }
         else
             this.generateDummyLevel();
     }
@@ -89,8 +114,20 @@ public class GameArea extends JPanel implements Bar{
         this.add(level);
     }
     
-    private void generateKingLevel() {
-        this.level = new LevelKing(this, dog);
+    private void generateKingLevelNoob() {
+        this.level = new LevelKing(this, dog, 1);
+        this.level.setContent();
+        this.add(level);
+    }
+    
+    private void generateKingLevelAdvanced() {
+        this.level = new LevelKing(this, dog, 2);
+        this.level.setContent();
+        this.add(level);
+    }
+    
+    private void generateKingLevelLegendary() {
+        this.level = new LevelKing(this, dog, 3);
         this.level.setContent();
         this.add(level);
     }
@@ -100,8 +137,19 @@ public class GameArea extends JPanel implements Bar{
         if(this.level_up_pending == true) {
             this.level_up_pending = false;
             this.simpleLevelUpdate(1, -1);
-            if(this.dog.master.getUserLevel() == 6)
-                this.generateKingLevel();
+            if(this.dog.master.getUserLevel() == 6) {
+                switch(this.dog.master.getUserDifficulty()) {
+                case 1:
+                    this.generateKingLevelNoob();
+                    break;
+                case 2:
+                    this.generateKingLevelAdvanced();
+                    break;
+                case 3:
+                    this.generateKingLevelLegendary();
+                    break;
+                }
+            }
             else
                 this.generateDummyLevel();
         }

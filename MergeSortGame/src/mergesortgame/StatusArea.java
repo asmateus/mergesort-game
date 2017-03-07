@@ -24,12 +24,13 @@ public class StatusArea extends JPanel {
     public final static String HELP_TEXT_FILE_PATH = "data/help.html";
     
     private ArrayList<SimpleUser> top_players = new ArrayList<>();
+    private Watchdog dog;
     
     private GridBagConstraints c = new GridBagConstraints();
     private JPanel help_panel = new JPanel();
     private JEditorPane top_player_disp = new JEditorPane();
     
-    public StatusArea() {
+    public StatusArea(Watchdog dog) {
         GridBagLayout gbl = new GridBagLayout();
         gbl.columnWeights = new double[] {1};
         gbl.rowWeights = new double[] {0.5, 0.5, 0};
@@ -37,6 +38,7 @@ public class StatusArea extends JPanel {
         this.setLayout(gbl);
         this.setBackground(Color.BLACK);
         
+        this.dog = dog;
         this.createHelpPanel();
         this.printTopPlayers();
     }
@@ -68,7 +70,7 @@ public class StatusArea extends JPanel {
     
     public void printTopPlayers() {
         IOManager io = new IOManager("visitor");
-        this.top_players = io.getTopPlayers(5);
+        this.top_players = io.getTopPlayers(5, this.dog.master.getUserDifficulty());
         String table = this.buildHTMLTable();
         
         c = new GridBagConstraints();

@@ -59,7 +59,7 @@ public class DescriptionStrings {
         return dummy;
     }
     
-    public static String getKingString(String pth) {
+    public static String getKingNoobString(String pth) {
         String king = ""
             + "<html>"
             + "<head>"
@@ -79,7 +79,59 @@ public class DescriptionStrings {
                 + "<img src=\""+path+pth+"crown.png\" alt=\"ERROR\" height=\"150\" width=\"150\">"
                 + "</div>"
             + "<h1>YOU ARE KING NOW</h1>"
-            + "<h2>MERGESORT GAME</h2>"
+            + "<h2>OF NOOBS, THAT IS</h2>"
+            + "</body>"
+            + "</html>";
+        return king;
+    }
+    
+    public static String getKingAdvancedString(String pth) {
+        String king = ""
+            + "<html>"
+            + "<head>"
+            + "<title></title>"
+            + "<meta content=\"\">"
+            + "<style>"
+            + "body{color:white;}"
+            + "h1{color:yellow;text-align:center;}"
+            + "h2{color:white;text-align:center;}"
+            + "div{text-align:center;}"
+            + "p{color:white;}"
+                + "span{font-weight:bold;}"
+            + "</style>"
+            + "</head>"
+            + "<body>"
+                + "<div>"
+                + "<img src=\""+path+pth+"crown.png\" alt=\"ERROR\" height=\"150\" width=\"150\">"
+                + "</div>"
+            + "<h1>YOU ARE KING NOW</h1>"
+            + "<h2>ALMOST A LEGEND</h2>"
+            + "</body>"
+            + "</html>";
+        return king;
+    }
+    
+    public static String getKingLegendaryString(String pth) {
+        String king = ""
+            + "<html>"
+            + "<head>"
+            + "<title></title>"
+            + "<meta content=\"\">"
+            + "<style>"
+            + "body{color:white;}"
+            + "h1{color:yellow;text-align:center;}"
+            + "h2{color:white;text-align:center;}"
+            + "div{text-align:center;}"
+            + "p{color:white;}"
+                + "span{font-weight:bold;}"
+            + "</style>"
+            + "</head>"
+            + "<body>"
+                + "<div>"
+                + "<img src=\""+path+pth+"crown.png\" alt=\"ERROR\" height=\"150\" width=\"150\">"
+                + "</div>"
+            + "<h1>CONGRATULATIONS</h1>"
+            + "<h2>YOU ARE A LEGEND</h2>"
             + "</body>"
             + "</html>";
         return king;
